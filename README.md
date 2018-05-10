@@ -1,0 +1,1 @@
+This repository is for the CICD in aws serverless architecture
