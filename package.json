@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/SandeepThakare/aws-cicd-practice/issues"
   },
-  "homepage": "https://github.com/SandeepThakare/aws-cicd-practice#readme"
+  "homepage": "https://github.com/SandeepThakare/aws-cicd-practice#readme",
+  "devDependencies": {
+    "jest": "^22.4.3",
+    "serverless": "^1.27.2",
+    "serverless-offline": "^3.20.3"
+  }
 }
