@@ -1,5 +1,5 @@
-import request from "supertest";
-
+// import request from "supertest";
+const request = require('supertest');
 describe('test handler /handler', function () {
 
 	let path = 'http://localhost:3000';
