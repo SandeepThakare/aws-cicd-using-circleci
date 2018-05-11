@@ -55,11 +55,17 @@ provider:
 #    - exclude-me-dir/**
 
 plugins:
+  - serverless-dynamodb-local
   - serverless-offline
+  - serverless-webpack
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handler/services/handler.hello
+    events:
+      - http:
+          path: handler
+          method: get
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
