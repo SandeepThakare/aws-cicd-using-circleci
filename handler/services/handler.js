@@ -1,6 +1,6 @@
 'use strict';
 
-exports.hello = (event, context, callback) => {
+export function hello(event, context, callback) {
   const response = {
     statusCode: 200,
     body: JSON.stringify({
