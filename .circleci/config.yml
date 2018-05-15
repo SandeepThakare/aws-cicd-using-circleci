@@ -32,18 +32,15 @@ jobs:
         
       - run: 
           name: Setup serverless package
-          command: |
-            sudo npm install serverless -g
+          command: sudo npm install serverless -g
 
       - run:
           name: Install serverless dynamodb offline - dependancy for serverless
-          command: |
-            sls dynamodb install
+          command: sls dynamodb install
 
       - run:
           name: run serverless offline for lambda functions
-          command: |
-            npm start
+          command: npm start
 
       - run:
           name: Unit tests with coverage
