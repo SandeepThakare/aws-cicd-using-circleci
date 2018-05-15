@@ -1,5 +1,5 @@
 // import request from "supertest";
-const request = require('supertest');
+import request from "supertest";
 describe('test handler /handler', function () {
 
 	let path = 'http://localhost:3000';
@@ -8,7 +8,8 @@ describe('test handler /handler', function () {
 		request(path)
 			.get('/handler')
 			.set('Accept', 'application/json')
-			.expect('Content-Type', /json/)
 			.expect(200, done);
 	});
 });
+
+// .expect('Content-Type', /json/)

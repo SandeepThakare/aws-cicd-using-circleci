@@ -59,6 +59,11 @@ plugins:
   - serverless-offline
   - serverless-webpack
 
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
 functions:
   hello:
     handler: handler/services/handler.hello
