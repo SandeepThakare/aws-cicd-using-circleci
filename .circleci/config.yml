@@ -29,6 +29,11 @@ jobs:
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
         
+      - run: 
+          name: Setup serverless package
+          command: |
+            npm install serverless -g
+
       - run:
           name: Install serverless dynamodb offline - dependancy for serverless
           command: |
