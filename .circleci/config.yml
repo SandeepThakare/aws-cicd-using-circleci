@@ -6,7 +6,6 @@ jobs:
 
     docker:
       - image: circleci/node:8
-      - image: lambci/lambda:latest
 
     working_directory: ~/repo
 
@@ -28,26 +27,12 @@ jobs:
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
-        
-      - run: 
-          name: Setup serverless package
-          command: sudo npm install serverless -g
-
-      - run:
-          name: Install serverless dynamodb offline - dependancy for serverless
-          command: sls dynamodb install
-
-      - run:
-          name: run serverless offline for lambda functions
-          command: npm start
-
       - run:
           name: Unit tests with coverage
           command: |
             ./cc-test-reporter before-build
-            npm run test
+            npm run test:ci
             ./cc-test-reporter after-build --exit-code $?
-
       - run:
           name: Deploy application
           command: npm run deploy
