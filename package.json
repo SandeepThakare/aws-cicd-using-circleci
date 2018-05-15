@@ -9,7 +9,7 @@
     "start": "sls offline start -r us-east-1 --noTimeout --corsDisallowCredentials false",
     "install:dynamodb": "./node_modules/.bin/sls dynamodb install",
     "start:dynamodb": "./node_modules/.bin/sls dynamodb start -p 8000  --migrate true",
-    "deploy": ".sls deploy --stage dev -v",
+    "deploy": "sls deploy --stage dev -v",
     "test": "npm run jest",
     "test:ci": "npm test && npm run coverage",
     "jest": "jest",
