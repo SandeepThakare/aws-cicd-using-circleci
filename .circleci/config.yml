@@ -32,7 +32,7 @@ jobs:
       - run: 
           name: Setup serverless package
           command: |
-            npm install serverless -g
+            sudo npm install serverless -g
 
       - run:
           name: Install serverless dynamodb offline - dependancy for serverless
