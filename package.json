@@ -12,7 +12,9 @@
     "deploy": ".sls deploy --stage dev -v",
     "test": "npm run jest",
     "test:ci": "npm test && npm run coverage",
-    "jest": "jest"
+    "jest": "jest",
+    "jest:watch": "jest --watchAll",
+    "coverage": "jest --coverage"
   },
   "repository": {
     "type": "git",
