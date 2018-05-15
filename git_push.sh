@@ -1,5 +1,7 @@
 #!/bin/bash
 
+clear
+
 git add .
 
 read -p "Enter commit message : " message
