@@ -1,8 +1,9 @@
+#!/bin/bash
+
 git add .
 
-echo 'enter commit message : '
-read message
+read -p "Enter commit message : " message
 
-git commit -m message
+git commit -m "$message"
 
 git push -u origin master
