@@ -7,6 +7,7 @@ jobs:
     docker:
       - image: circleci/node:8
       - image: lambci/lambda:latest
+      - image: kalote/circleci-node8-jre
 
     working_directory: ~/repo
 
