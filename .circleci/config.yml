@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: Install serverless plugin globally
-          command: npm install serverless -g
+          command: sudo npm install serverless -g
 
       - run:
           name: Setup Code Climate test-reporter
