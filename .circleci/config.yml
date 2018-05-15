@@ -29,6 +29,11 @@ jobs:
             chmod +x ./cc-test-reporter
 
       - run:
+          name: run serverless offline for lambda functions
+          command: |
+            npm start
+
+      - run:
           name: Unit tests with coverage
           command: |
             ./cc-test-reporter before-build
