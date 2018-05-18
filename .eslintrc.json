@@ -6,6 +6,10 @@
         "jest": true
     },
     "extends": "eslint:recommended",
+    "globals": {
+        "process": false,
+        "no-redeclare": false
+    },
     "parserOptions": {
         "sourceType": "module",
         "ecmaVersion": 2017
