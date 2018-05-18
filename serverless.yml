@@ -46,14 +46,22 @@ functions:
     events:
       - http:
           path: handler
-          method: get
+          method: GET
   
   addCustomer:
     handler: customer/customerCRUD.addCustomer
     events:
       - http:
           path: addCustomer/{email}
-          method: post
+          method: POST
+  
+  getCustomersList:
+    handler: customer/customerCRUD.getCustomersList
+    events:
+      - http:
+          path: getCustomersList
+          method: GET
+
 
 resources:
   Resources:

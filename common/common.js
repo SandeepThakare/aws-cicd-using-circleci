@@ -17,4 +17,32 @@ export default class common {
         
 		return res;
 	}
+    
+	postParams(tableName, items) {
+		let params = {
+			TableName: tableName,
+			Item: items
+		};
+
+		return params;
+	}
+    
+	scanParams(tableName) {
+		let params = {
+			TableName: tableName
+		};
+        
+		return params;
+	}
+
+	queryParams(tableName, key, keyvalue) {
+		let params = {
+			TableName: tableName,
+			KeyConditionExpression: 'key = :pk',
+			ExpressionAttributeValues: {
+				':pk': decodeURIComponent(keyvalue)
+			}
+		};
+		return params;
+	}
 }

@@ -14,7 +14,8 @@
     "test:ci": "npm test && npm run coverage",
     "jest": "jest",
     "jest:watch": "jest --watchAll",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "dynamoDb": "sls dynamodb start -p 8000 --migrate true --stage dev"
   },
   "repository": {
     "type": "git",
