@@ -38,7 +38,7 @@ export default class common {
 	queryParams(tableName, key, keyvalue) {
 		let params = {
 			TableName: tableName,
-			KeyConditionExpression: 'key = :pk',
+			KeyConditionExpression: `${key} = :pk`,
 			ExpressionAttributeValues: {
 				':pk': decodeURIComponent(keyvalue)
 			}

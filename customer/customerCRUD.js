@@ -1,6 +1,8 @@
 import Common from '../common/common';
 import AWS from 'aws-sdk';
 import dynamoDB from '../common/dynamodb';
+import StatusCode from '../common/statusCode';
+let statusCode = new StatusCode().getStatusCode();
 
 export function addCustomer(event, context, callback) {
 
@@ -8,7 +10,8 @@ export function addCustomer(event, context, callback) {
 	let email;
 	let created_at = new Date().getTime();
 	if (!event.body || !event.pathParameters.email) {
-		callback(null, new Common().callbackHandler(401, 'Event Body or email is missing !!!'));
+		callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, 'Event Body or email is missing !!!'));
+		// callback(null, new Error('Malformed input ...'));
 		return;
 	} else {
 		eventData = JSON.parse(event.body);
@@ -37,12 +40,12 @@ export function addCustomer(event, context, callback) {
 	dynamoDB.put(postParams, (err, data) => {
 		if (err) {
 			console.log('Unable to add records in table. Error JSON: ', JSON.stringify(err, undefined, 2));
-			callback(null, new Common().callbackHandler(401, err));
+			callback(null, new Common().callbackHandler(statusCode.NO_CONTENT, err));
 			return;
 		}
 
 		console.log('Data added successfully', data);
-		callback(null, new Common().callbackHandler(200, { email: decodeURIComponent(email), cutsomerData: eventData }));
+		callback(null, new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
 		return;
 	});
 
@@ -55,21 +58,45 @@ export function getCustomersList(event, context, callback) {
 	dynamoDB.scan(scanParams, (err, data) => {
 		if(err) {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
-			callback(null, new Common().callbackHandler(401, err));
+			callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
 			return;
 		}
 
 		console.log('Result - ', data);
-		callback(null, new Common().callbackHandler(200, data));
+		callback(null, new Common().callbackHandler(statusCode.OK, data));
 		return;
 	});
 }
 
 export function getCustomer(event, context, callback) {
 
-	// let email = null;
+	let email = null;
 
-	// if(!evet.pathParameters || !event.pathParameters) {
+	if(!event.pathParameters || !event.pathParameters) {
+		console.log('Email is missing!!');
+		callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, 'Email is missing !!!'));
+		return;
+	} else {
+		email = decodeURIComponent(event.pathParameters.email);
+	}
 
-	// }
+	let queryParams = new Common().queryParams(process.env.CUSTOMER_INFO, 'email', email);
+
+	dynamoDB.query(queryParams, (err, result) => {
+        
+		if(err) {
+			console.log('Unable to scan table. Error JOSN: ', JSON.stringify(err, undefined, 2));
+			callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST,err));
+			return;
+		}
+
+		if(result.Items.length) {
+			console.log('Result - ', result.Items[0]);
+			callback(null, new Common().callbackHandler(statusCode.OK, result.Items[0]));
+			return;
+		} else {
+			callback(null, new Common().callbackHandler(statusCode.OK, 'No data associated with this ID'));
+			return;
+		}
+	});
 }

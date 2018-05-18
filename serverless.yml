@@ -61,7 +61,13 @@ functions:
       - http:
           path: getCustomersList
           method: GET
-
+          
+  getCustomer:
+    handler: customer/customerCRUD.getCustomer
+    events:
+      - http:
+          path: getCustomer/{email}
+          method: GET
 
 resources:
   Resources:
