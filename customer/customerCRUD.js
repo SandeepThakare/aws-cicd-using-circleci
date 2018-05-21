@@ -26,15 +26,6 @@ export function addCustomer(event, context, callback) {
 
 	let postParams = new Common().postParams(process.env.CUSTOMER_INFO, Item);
 
-	// var params = {
-	// 	TableName: process.env.CUSTOMER_INFO,
-	// 	Item: {
-	// 		email: decodeURIComponent(email),
-	// 		created_at: created_at,
-	// 		customerData: eventData
-	// 	},
-	// };
-
 	console.log(postParams);
 
 	dynamoDB.put(postParams, (err, data) => {
@@ -53,7 +44,8 @@ export function addCustomer(event, context, callback) {
 
 export function getCustomersList(event, context, callback) {
 
-	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO);
+	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
+	console.log(scanParams);
 
 	dynamoDB.scan(scanParams, (err, data) => {
 		if(err) {
@@ -62,7 +54,7 @@ export function getCustomersList(event, context, callback) {
 			return;
 		}
 
-		console.log('Result - ', data);
+		// console.log('Result - ', data);
 		callback(null, new Common().callbackHandler(statusCode.OK, data));
 		return;
 	});
