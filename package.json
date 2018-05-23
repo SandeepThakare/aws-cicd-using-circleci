@@ -6,9 +6,9 @@
   "scripts": {
     "install:offline": "docker pull lambci/lambda",
     "setup": "./node_modules/.bin/sls config credentials --provider aws --key KEY --secret SECRET",
-    "start": "sls offline start -r us-east-1 --noTimeout --corsDisallowCredentials false",
+    "start:serverless": "sls offline start -r us-east-1 --noTimeout --corsDisallowCredentials false",
     "install:dynamodb": "./node_modules/.bin/sls dynamodb install",
-    "start:dynamodb": "./node_modules/.bin/sls dynamodb start -p 8000  --migrate true",
+    "start:dynamodb": "sls dynamodb start -p 8000  --migrate true",
     "deploy": "sls deploy --stage dev -v",
     "test": "npm run jest",
     "test:ci": "npm test && npm run coverage",
@@ -29,8 +29,9 @@
   "homepage": "https://github.com/SandeepThakare/aws-cicd-practice#readme",
   "dependencies": {
     "aws-sdk": "^2.213.1",
-    "serverless-dynamodb-client": "0.0.2",
     "babel-runtime": "^6.26.0",
+    "fs": "0.0.1-security",
+    "serverless-dynamodb-client": "0.0.2",
     "source-map-support": "^0.4.18"
   },
   "devDependencies": {
