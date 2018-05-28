@@ -33,8 +33,7 @@ export function addCustomer(event, context, callback) {
 	dynamoDB.put(postParams, async (err, data) => {
 		if (err) {
 			console.log('Unable to add records in table. Error JSON: ', JSON.stringify(err, undefined, 2));
-			callback(null, await new Common().callbackHandler(statusCode.NO_CONTENT, err));
-			return;
+			return callback(null, await new Common().callbackHandler(statusCode.NO_CONTENT, err));
 		}
 
 		console.log('Data added successfully', data);
@@ -51,8 +50,7 @@ export function getCustomersList(event, context, callback) {
 	dynamoDB.scan(scanParams, (err, data) => {
 		if(err) {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
-			callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
-			return;
+			return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
 		}
 
 		console.log('Result - ', data);

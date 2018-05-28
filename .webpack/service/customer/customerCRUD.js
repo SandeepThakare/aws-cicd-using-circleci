@@ -66,404 +66,145 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./customer/customerCRUD.js");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports) {
+/******/ ({
 
-module.exports = require("source-map-support/register");
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
-module.exports = require("aws-sdk");
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/helpers/createClass");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/helpers/classCallCheck");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/core-js/json/stringify");
-
-/***/ }),
-/* 5 */
+/***/ "./common/common.js":
+/*!**************************!*\
+  !*** ./common/common.js ***!
+  \**************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _classCallCheck2 = __webpack_require__(3);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(2);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-__webpack_require__(0);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var StatusCode = function () {
-	function StatusCode() {
-		// console.log('Inside Status code file');
-
-		(0, _classCallCheck3.default)(this, StatusCode);
-	}
-
-	(0, _createClass3.default)(StatusCode, [{
-		key: 'getStatusCode',
-		value: function getStatusCode() {
-			var code_status = {
-				'OK': 200,
-				'CREATED': 201,
-				'NO_CONTENT': 204,
-				'PARTIAL_CONTENT': 206,
-				'NOT_MODIFIED': 304,
-				'BAD_REQUEST': 400,
-				'UNAUTHORIZED': 401,
-				'FORBIDDEN': 403,
-				'NOT_FOUND': 404,
-				'INTERNAL_SERVER_ERROR': 500
-			};
-
-			return code_status;
-		}
-	}]);
-	return StatusCode;
-}();
-
-exports.default = StatusCode;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _stringify = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ \"babel-runtime/core-js/json/stringify\");\n\nvar _stringify2 = _interopRequireDefault(_stringify);\n\nvar _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ \"babel-runtime/helpers/classCallCheck\");\n\nvar _classCallCheck3 = _interopRequireDefault(_classCallCheck2);\n\nvar _createClass2 = __webpack_require__(/*! babel-runtime/helpers/createClass */ \"babel-runtime/helpers/createClass\");\n\nvar _createClass3 = _interopRequireDefault(_createClass2);\n\n__webpack_require__(/*! source-map-support/register */ \"source-map-support/register\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar common = function () {\n\tfunction common() {\n\t\t// console.log('In common js constructor');\n\n\t\t(0, _classCallCheck3.default)(this, common);\n\t}\n\n\t(0, _createClass3.default)(common, [{\n\t\tkey: 'callbackHandler',\n\t\tvalue: function callbackHandler(statusCode, message) {\n\n\t\t\tvar res = {\n\t\t\t\tStatusCode: statusCode,\n\t\t\t\theaders: {\n\t\t\t\t\t'Access-Control-Allow-Origin': '*',\n\t\t\t\t\t'Access-Control-Allow-Headers': '*',\n\t\t\t\t\t'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT'\n\t\t\t\t},\n\t\t\t\tbody: (0, _stringify2.default)(message)\n\t\t\t};\n\n\t\t\treturn res;\n\t\t}\n\t}, {\n\t\tkey: 'postParams',\n\t\tvalue: function postParams(tableName, items) {\n\t\t\tvar params = {\n\t\t\t\tTableName: tableName,\n\t\t\t\tItem: items\n\t\t\t};\n\n\t\t\treturn params;\n\t\t}\n\t}, {\n\t\tkey: 'scanParams',\n\t\tvalue: function scanParams(tableName) {\n\t\t\tvar params = {\n\t\t\t\tTableName: tableName\n\t\t\t};\n\n\t\t\treturn params;\n\t\t}\n\t}, {\n\t\tkey: 'queryParams',\n\t\tvalue: function queryParams(tableName, key, keyvalue) {\n\t\t\tvar params = {\n\t\t\t\tTableName: tableName,\n\t\t\t\tKeyConditionExpression: key + ' = :pk',\n\t\t\t\tExpressionAttributeValues: {\n\t\t\t\t\t':pk': decodeURIComponent(keyvalue)\n\t\t\t\t}\n\t\t\t};\n\t\t\treturn params;\n\t\t}\n\t}]);\n\treturn common;\n}();\n\nexports.default = common;\n\n//# sourceURL=webpack:///./common/common.js?");
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
 
-module.exports = require("dotenv");
-
-/***/ }),
-/* 7 */
+/***/ "./common/dynamodb.js":
+/*!****************************!*\
+  !*** ./common/dynamodb.js ***!
+  \****************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-__webpack_require__(0);
-
-var _awsSdk = __webpack_require__(1);
-
-__webpack_require__(6).config({ path: "../.env" /* path to your project root folder */ });
-// eslint-disable-line import/no-extraneous-dependencies
-// import AWS from 'aws-sdk';
-var options = {};
-console.log('Envoirment -----> ', process.env.IS_OFFLINE);
-// connect to local DB if running offline
-if (!process.env.IS_OFFLINE) {
-	console.log('Inside of offline');
-	options = {
-		region: 'us-east-1',
-		endpoint: 'http://localhost:8000'
-	};
-}
-
-console.log('Outside');
-var dynamoDB = new _awsSdk.DynamoDB.DocumentClient(options);
-
-exports.default = dynamoDB;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\n__webpack_require__(/*! source-map-support/register */ \"source-map-support/register\");\n\nvar _awsSdk = __webpack_require__(/*! aws-sdk */ \"aws-sdk\");\n\n__webpack_require__(/*! dotenv */ \"dotenv\").config({ path: \"../.env\" /* path to your project root folder */ });\n// eslint-disable-line import/no-extraneous-dependencies\n// import AWS from 'aws-sdk';\nvar options = {};\nconsole.log('Envoirment -----> ', process.env.IS_OFFLINE);\n// connect to local DB if running offline\nif (!process.env.IS_OFFLINE) {\n\tconsole.log('Inside of offline');\n\toptions = {\n\t\tregion: 'us-east-1',\n\t\tendpoint: 'http://localhost:8000'\n\t};\n}\n\nconsole.log('Outside');\nvar dynamoDB = new _awsSdk.DynamoDB.DocumentClient(options);\n\nexports.default = dynamoDB;\n\n//# sourceURL=webpack:///./common/dynamodb.js?");
 
 /***/ }),
-/* 8 */
+
+/***/ "./common/statusCode.js":
+/*!******************************!*\
+  !*** ./common/statusCode.js ***!
+  \******************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _stringify = __webpack_require__(4);
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
-var _classCallCheck2 = __webpack_require__(3);
-
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
-
-var _createClass2 = __webpack_require__(2);
-
-var _createClass3 = _interopRequireDefault(_createClass2);
-
-__webpack_require__(0);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var common = function () {
-	function common() {
-		// console.log('In common js constructor');
-
-		(0, _classCallCheck3.default)(this, common);
-	}
-
-	(0, _createClass3.default)(common, [{
-		key: 'callbackHandler',
-		value: function callbackHandler(statusCode, message) {
-
-			var res = {
-				StatusCode: statusCode,
-				headers: {
-					'Access-Control-Allow-Origin': '*',
-					'Access-Control-Allow-Headers': '*',
-					'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT'
-				},
-				body: (0, _stringify2.default)(message)
-			};
-
-			return res;
-		}
-	}, {
-		key: 'postParams',
-		value: function postParams(tableName, items) {
-			var params = {
-				TableName: tableName,
-				Item: items
-			};
-
-			return params;
-		}
-	}, {
-		key: 'scanParams',
-		value: function scanParams(tableName) {
-			var params = {
-				TableName: tableName
-			};
-
-			return params;
-		}
-	}, {
-		key: 'queryParams',
-		value: function queryParams(tableName, key, keyvalue) {
-			var params = {
-				TableName: tableName,
-				KeyConditionExpression: key + ' = :pk',
-				ExpressionAttributeValues: {
-					':pk': decodeURIComponent(keyvalue)
-				}
-			};
-			return params;
-		}
-	}]);
-	return common;
-}();
-
-exports.default = common;
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _classCallCheck2 = __webpack_require__(/*! babel-runtime/helpers/classCallCheck */ \"babel-runtime/helpers/classCallCheck\");\n\nvar _classCallCheck3 = _interopRequireDefault(_classCallCheck2);\n\nvar _createClass2 = __webpack_require__(/*! babel-runtime/helpers/createClass */ \"babel-runtime/helpers/createClass\");\n\nvar _createClass3 = _interopRequireDefault(_createClass2);\n\n__webpack_require__(/*! source-map-support/register */ \"source-map-support/register\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar StatusCode = function () {\n\tfunction StatusCode() {\n\t\t// console.log('Inside Status code file');\n\n\t\t(0, _classCallCheck3.default)(this, StatusCode);\n\t}\n\n\t(0, _createClass3.default)(StatusCode, [{\n\t\tkey: 'getStatusCode',\n\t\tvalue: function getStatusCode() {\n\t\t\tvar code_status = {\n\t\t\t\t'OK': 200,\n\t\t\t\t'CREATED': 201,\n\t\t\t\t'NO_CONTENT': 204,\n\t\t\t\t'PARTIAL_CONTENT': 206,\n\t\t\t\t'NOT_MODIFIED': 304,\n\t\t\t\t'BAD_REQUEST': 400,\n\t\t\t\t'UNAUTHORIZED': 401,\n\t\t\t\t'FORBIDDEN': 403,\n\t\t\t\t'NOT_FOUND': 404,\n\t\t\t\t'INTERNAL_SERVER_ERROR': 500\n\t\t\t};\n\n\t\t\treturn code_status;\n\t\t}\n\t}]);\n\treturn StatusCode;\n}();\n\nexports.default = StatusCode;\n\n//# sourceURL=webpack:///./common/statusCode.js?");
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
 
-module.exports = require("babel-runtime/helpers/asyncToGenerator");
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/regenerator");
-
-/***/ }),
-/* 11 */
+/***/ "./customer/customerCRUD.js":
+/*!**********************************!*\
+  !*** ./customer/customerCRUD.js ***!
+  \**********************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\nvar _regenerator = __webpack_require__(/*! babel-runtime/regenerator */ \"babel-runtime/regenerator\");\n\nvar _regenerator2 = _interopRequireDefault(_regenerator);\n\nvar _asyncToGenerator2 = __webpack_require__(/*! babel-runtime/helpers/asyncToGenerator */ \"babel-runtime/helpers/asyncToGenerator\");\n\nvar _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);\n\nvar _stringify = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ \"babel-runtime/core-js/json/stringify\");\n\nvar _stringify2 = _interopRequireDefault(_stringify);\n\nexports.addCustomer = addCustomer;\nexports.getCustomersList = getCustomersList;\nexports.getCustomer = getCustomer;\n\n__webpack_require__(/*! source-map-support/register */ \"source-map-support/register\");\n\nvar _common = __webpack_require__(/*! ../common/common */ \"./common/common.js\");\n\nvar _common2 = _interopRequireDefault(_common);\n\nvar _awsSdk = __webpack_require__(/*! aws-sdk */ \"aws-sdk\");\n\nvar _awsSdk2 = _interopRequireDefault(_awsSdk);\n\nvar _dynamodb = __webpack_require__(/*! ../common/dynamodb */ \"./common/dynamodb.js\");\n\nvar _dynamodb2 = _interopRequireDefault(_dynamodb);\n\nvar _statusCode = __webpack_require__(/*! ../common/statusCode */ \"./common/statusCode.js\");\n\nvar _statusCode2 = _interopRequireDefault(_statusCode);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar statusCode = new _statusCode2.default().getStatusCode();\n// AWS.config.region = 'us-east-1';\n\nfunction addCustomer(event, context, callback) {\n\tvar _this = this;\n\n\tvar eventData = void 0;\n\tvar email = void 0;\n\tvar created_at = new Date().getTime();\n\tif (!event.body || !event.pathParameters.email) {\n\t\tcallback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'Event Body or email is missing !!!'));\n\t\t// callback(null, new Error('Malformed input ...'));\n\t\treturn;\n\t} else {\n\t\teventData = JSON.parse(event.body);\n\t\temail = event.pathParameters.email;\n\t}\n\n\tvar Item = {\n\t\temail: decodeURIComponent(email),\n\t\tcreated_at: created_at,\n\t\tcustomerData: eventData\n\t};\n\n\tvar postParams = new _common2.default().postParams(process.env.CUSTOMER_INFO, Item);\n\n\tconsole.log(postParams);\n\tconsole.log('dasd ----> ', (0, _stringify2.default)(new _common2.default().callbackHandler(statusCode.NO_CONTENT, 'err')));\n\n\t_dynamodb2.default.put(postParams, function () {\n\t\tvar _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(err, data) {\n\t\t\treturn _regenerator2.default.wrap(function _callee$(_context) {\n\t\t\t\twhile (1) {\n\t\t\t\t\tswitch (_context.prev = _context.next) {\n\t\t\t\t\t\tcase 0:\n\t\t\t\t\t\t\tif (!err) {\n\t\t\t\t\t\t\t\t_context.next = 7;\n\t\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\tconsole.log('Unable to add records in table. Error JSON: ', (0, _stringify2.default)(err, undefined, 2));\n\t\t\t\t\t\t\t_context.t0 = callback;\n\t\t\t\t\t\t\t_context.next = 5;\n\t\t\t\t\t\t\treturn new _common2.default().callbackHandler(statusCode.NO_CONTENT, err);\n\n\t\t\t\t\t\tcase 5:\n\t\t\t\t\t\t\t_context.t1 = _context.sent;\n\t\t\t\t\t\t\treturn _context.abrupt('return', (0, _context.t0)(null, _context.t1));\n\n\t\t\t\t\t\tcase 7:\n\n\t\t\t\t\t\t\tconsole.log('Data added successfully', data);\n\t\t\t\t\t\t\t_context.t2 = callback;\n\t\t\t\t\t\t\t_context.next = 11;\n\t\t\t\t\t\t\treturn new _common2.default().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData });\n\n\t\t\t\t\t\tcase 11:\n\t\t\t\t\t\t\t_context.t3 = _context.sent;\n\t\t\t\t\t\t\treturn _context.abrupt('return', (0, _context.t2)(null, _context.t3));\n\n\t\t\t\t\t\tcase 13:\n\t\t\t\t\t\tcase 'end':\n\t\t\t\t\t\t\treturn _context.stop();\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}, _callee, _this);\n\t\t}));\n\n\t\treturn function (_x, _x2) {\n\t\t\treturn _ref.apply(this, arguments);\n\t\t};\n\t}());\n}\n\nfunction getCustomersList(event, context, callback) {\n\n\tvar scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');\n\tconsole.log(scanParams);\n\n\t_dynamodb2.default.scan(scanParams, function (err, data) {\n\t\tif (err) {\n\t\t\tconsole.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));\n\t\t\treturn callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));\n\t\t}\n\n\t\tconsole.log('Result - ', data);\n\t\tcallback(null, new _common2.default().callbackHandler(statusCode.OK, data));\n\t\treturn;\n\t});\n}\n\nfunction getCustomer(event, context, callback) {\n\n\tvar email = null;\n\n\tif (!event.pathParameters || !event.pathParameters) {\n\t\tconsole.log('Email is missing!!');\n\t\tcallback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'Email is missing !!!'));\n\t\treturn;\n\t} else {\n\t\temail = decodeURIComponent(event.pathParameters.email);\n\t}\n\n\tvar queryParams = new _common2.default().queryParams(process.env.CUSTOMER_INFO, 'email', email);\n\n\t_dynamodb2.default.query(queryParams, function (err, result) {\n\n\t\tif (err) {\n\t\t\tconsole.log('Unable to scan table. Error JOSN: ', (0, _stringify2.default)(err, undefined, 2));\n\t\t\tcallback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));\n\t\t\treturn;\n\t\t}\n\n\t\tif (result.Items.length) {\n\t\t\tconsole.log('Result - ', result.Items[0]);\n\t\t\tcallback(null, new _common2.default().callbackHandler(statusCode.OK, result.Items[0]));\n\t\t\treturn;\n\t\t} else {\n\t\t\tcallback(null, new _common2.default().callbackHandler(statusCode.OK, 'No data associated with this ID'));\n\t\t\treturn;\n\t\t}\n\t});\n}\n\n//# sourceURL=webpack:///./customer/customerCRUD.js?");
 
+/***/ }),
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
+/***/ "aws-sdk":
+/*!**************************!*\
+  !*** external "aws-sdk" ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-var _regenerator = __webpack_require__(10);
+eval("module.exports = require(\"aws-sdk\");\n\n//# sourceURL=webpack:///external_%22aws-sdk%22?");
 
-var _regenerator2 = _interopRequireDefault(_regenerator);
+/***/ }),
 
-var _asyncToGenerator2 = __webpack_require__(9);
+/***/ "babel-runtime/core-js/json/stringify":
+/*!*******************************************************!*\
+  !*** external "babel-runtime/core-js/json/stringify" ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+eval("module.exports = require(\"babel-runtime/core-js/json/stringify\");\n\n//# sourceURL=webpack:///external_%22babel-runtime/core-js/json/stringify%22?");
 
-var _stringify = __webpack_require__(4);
+/***/ }),
 
-var _stringify2 = _interopRequireDefault(_stringify);
+/***/ "babel-runtime/helpers/asyncToGenerator":
+/*!*********************************************************!*\
+  !*** external "babel-runtime/helpers/asyncToGenerator" ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-exports.addCustomer = addCustomer;
-exports.getCustomersList = getCustomersList;
-exports.getCustomer = getCustomer;
+eval("module.exports = require(\"babel-runtime/helpers/asyncToGenerator\");\n\n//# sourceURL=webpack:///external_%22babel-runtime/helpers/asyncToGenerator%22?");
 
-__webpack_require__(0);
+/***/ }),
 
-var _common = __webpack_require__(8);
+/***/ "babel-runtime/helpers/classCallCheck":
+/*!*******************************************************!*\
+  !*** external "babel-runtime/helpers/classCallCheck" ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-var _common2 = _interopRequireDefault(_common);
+eval("module.exports = require(\"babel-runtime/helpers/classCallCheck\");\n\n//# sourceURL=webpack:///external_%22babel-runtime/helpers/classCallCheck%22?");
 
-var _awsSdk = __webpack_require__(1);
+/***/ }),
 
-var _awsSdk2 = _interopRequireDefault(_awsSdk);
+/***/ "babel-runtime/helpers/createClass":
+/*!****************************************************!*\
+  !*** external "babel-runtime/helpers/createClass" ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-var _dynamodb = __webpack_require__(7);
+eval("module.exports = require(\"babel-runtime/helpers/createClass\");\n\n//# sourceURL=webpack:///external_%22babel-runtime/helpers/createClass%22?");
 
-var _dynamodb2 = _interopRequireDefault(_dynamodb);
+/***/ }),
 
-var _statusCode = __webpack_require__(5);
+/***/ "babel-runtime/regenerator":
+/*!********************************************!*\
+  !*** external "babel-runtime/regenerator" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-var _statusCode2 = _interopRequireDefault(_statusCode);
+eval("module.exports = require(\"babel-runtime/regenerator\");\n\n//# sourceURL=webpack:///external_%22babel-runtime/regenerator%22?");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+/***/ }),
 
-var statusCode = new _statusCode2.default().getStatusCode();
-// AWS.config.region = 'us-east-1';
+/***/ "dotenv":
+/*!*************************!*\
+  !*** external "dotenv" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-function addCustomer(event, context, callback) {
-	var _this = this;
+eval("module.exports = require(\"dotenv\");\n\n//# sourceURL=webpack:///external_%22dotenv%22?");
 
-	var eventData = void 0;
-	var email = void 0;
-	var created_at = new Date().getTime();
-	if (!event.body || !event.pathParameters.email) {
-		callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'Event Body or email is missing !!!'));
-		// callback(null, new Error('Malformed input ...'));
-		return;
-	} else {
-		eventData = JSON.parse(event.body);
-		email = event.pathParameters.email;
-	}
+/***/ }),
 
-	var Item = {
-		email: decodeURIComponent(email),
-		created_at: created_at,
-		customerData: eventData
-	};
+/***/ "source-map-support/register":
+/*!**********************************************!*\
+  !*** external "source-map-support/register" ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-	var postParams = new _common2.default().postParams(process.env.CUSTOMER_INFO, Item);
-
-	console.log(postParams);
-	console.log('dasd ----> ', (0, _stringify2.default)(new _common2.default().callbackHandler(statusCode.NO_CONTENT, 'err')));
-
-	_dynamodb2.default.put(postParams, function () {
-		var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(err, data) {
-			return _regenerator2.default.wrap(function _callee$(_context) {
-				while (1) {
-					switch (_context.prev = _context.next) {
-						case 0:
-							if (!err) {
-								_context.next = 8;
-								break;
-							}
-
-							console.log('Unable to add records in table. Error JSON: ', (0, _stringify2.default)(err, undefined, 2));
-							_context.t0 = callback;
-							_context.next = 5;
-							return new _common2.default().callbackHandler(statusCode.NO_CONTENT, err);
-
-						case 5:
-							_context.t1 = _context.sent;
-							(0, _context.t0)(null, _context.t1);
-							return _context.abrupt('return');
-
-						case 8:
-
-							console.log('Data added successfully', data);
-							_context.t2 = callback;
-							_context.next = 12;
-							return new _common2.default().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData });
-
-						case 12:
-							_context.t3 = _context.sent;
-							return _context.abrupt('return', (0, _context.t2)(null, _context.t3));
-
-						case 14:
-						case 'end':
-							return _context.stop();
-					}
-				}
-			}, _callee, _this);
-		}));
-
-		return function (_x, _x2) {
-			return _ref.apply(this, arguments);
-		};
-	}());
-}
-
-function getCustomersList(event, context, callback) {
-
-	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
-	console.log(scanParams);
-
-	_dynamodb2.default.scan(scanParams, function (err, data) {
-		if (err) {
-			console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
-			callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
-			return;
-		}
-
-		console.log('Result - ', data);
-		callback(null, new _common2.default().callbackHandler(statusCode.OK, data));
-		return;
-	});
-}
-
-function getCustomer(event, context, callback) {
-
-	var email = null;
-
-	if (!event.pathParameters || !event.pathParameters) {
-		console.log('Email is missing!!');
-		callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'Email is missing !!!'));
-		return;
-	} else {
-		email = decodeURIComponent(event.pathParameters.email);
-	}
-
-	var queryParams = new _common2.default().queryParams(process.env.CUSTOMER_INFO, 'email', email);
-
-	_dynamodb2.default.query(queryParams, function (err, result) {
-
-		if (err) {
-			console.log('Unable to scan table. Error JOSN: ', (0, _stringify2.default)(err, undefined, 2));
-			callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
-			return;
-		}
-
-		if (result.Items.length) {
-			console.log('Result - ', result.Items[0]);
-			callback(null, new _common2.default().callbackHandler(statusCode.OK, result.Items[0]));
-			return;
-		} else {
-			callback(null, new _common2.default().callbackHandler(statusCode.OK, 'No data associated with this ID'));
-			return;
-		}
-	});
-}
+eval("module.exports = require(\"source-map-support/register\");\n\n//# sourceURL=webpack:///external_%22source-map-support/register%22?");
 
 /***/ })
-/******/ ])));
+
+/******/ })));
