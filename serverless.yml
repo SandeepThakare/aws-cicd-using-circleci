@@ -26,6 +26,7 @@ plugins:
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-webpack
+  - serverless-export-env
 
 custom:
   webpack:
@@ -69,6 +70,10 @@ functions:
       - http:
           path: getCustomer/{email}
           method: GET
+  
+#Common functions:
+  dynamodb: 
+    handler: common/dynamodb.dynamoDB
 
 resources:
   Resources:
