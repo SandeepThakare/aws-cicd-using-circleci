@@ -43,12 +43,23 @@ const fs = require('fs');
 //   console.log('an event occurred!');
 // });
 
-{
-    console.time("loop");
-    for (var i = 0; i < 10000000; i += 1){
-        // Do nothing
-        debugger
-    }
-    console.timeEnd("loop");
-    console.log('Add',  10+20+30)
-}
+// {
+//     console.time("loop");
+//     for (var i = 0; i < 10000000; i += 1){
+//         // Do nothing
+//         debugger
+//     }
+//     console.timeEnd("loop");
+//     console.log('Add',  10+20+30)
+// }
+
+var readableStream = fs.createReadStream('webpack.config.js');
+var fileData = '';
+
+readableStream.on('data', function(chunk) {
+    fileData += chunk;
+});
+
+readableStream.on('end', function() {
+  console.log(fileData);
+});
