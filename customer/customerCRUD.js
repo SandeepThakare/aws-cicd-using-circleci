@@ -5,7 +5,7 @@ import StatusCode from '../common/statusCode';
 let statusCode = new StatusCode().getStatusCode();
 // AWS.config.region = 'us-east-1';
 
-export function addCustomer(event, context, callback) {
+export async function addCustomer(event, context, callback) {
 
 	let eventData;
 	let email;
@@ -38,7 +38,7 @@ export function addCustomer(event, context, callback) {
 		}
 
 		console.log('Data added successfully', data);
-		callback(null, new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
+		callback(null, await new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
 		return;
 	});
 
