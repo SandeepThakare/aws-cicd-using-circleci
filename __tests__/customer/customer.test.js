@@ -1,6 +1,7 @@
 // import { hello } from '../../handler/handler';
 import { getCustomer, getCustomersList, addCustomer } from '../../customer/customerCRUD';
 
+
 describe('getCustomersList', () => {
 
 	test('the getCustomersList function should work', () => {
@@ -17,7 +18,7 @@ describe('getCustomersList', () => {
 			console.log('error ----------------> ', err);
 			console.log('response ----------------> ', response);
 			// let val = JSON.parse(response);
-			expect(response.StatusCode).toEqual(400);
+			expect(response.StatusCode).toEqual(200);
 		});
 	});
 

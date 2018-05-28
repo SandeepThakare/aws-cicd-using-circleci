@@ -3,6 +3,7 @@ import AWS from 'aws-sdk';
 import dynamoDB from '../common/dynamodb';
 import StatusCode from '../common/statusCode';
 let statusCode = new StatusCode().getStatusCode();
+// AWS.config.region = 'us-east-1';
 
 export function addCustomer(event, context, callback) {
 
@@ -45,7 +46,7 @@ export function addCustomer(event, context, callback) {
 export function getCustomersList(event, context, callback) {
 
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
-	// console.log(scanParams);
+	console.log(scanParams);
 
 	dynamoDB.scan(scanParams, (err, data) => {
 		if(err) {
@@ -54,7 +55,7 @@ export function getCustomersList(event, context, callback) {
 			return;
 		}
 
-		// console.log('Result - ', data);
+		console.log('Result - ', data);
 		callback(null, new Common().callbackHandler(statusCode.OK, data));
 		return;
 	});

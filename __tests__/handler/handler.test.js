@@ -21,6 +21,7 @@ describe('handler', () => {
 
 	test('the data should be valid', () => {
 		hello({}, {}, (err, response) => {
+			console.log('Response ---->', response)
 			let val = JSON.parse(response.body);
 			expect(val.message).toMatch('hello there');
 		});
