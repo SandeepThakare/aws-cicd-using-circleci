@@ -9,7 +9,6 @@ provider:
   environment:
     CUSTOMER_INFO: "customer-info"
     IS_OFFLINE: true
-    AWS_REGION: "us-east-1"
 
   iamRoleStatements:
     - Effect: Allow
