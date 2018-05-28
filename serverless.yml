@@ -74,6 +74,12 @@ functions:
   dynamodb: 
     handler: common/dynamodb.dynamoDB
 
+  common:
+    handler: common/common.common
+
+  statusCode:
+    handler: common/statusCode.StatusCode
+
 resources:
   Resources:
     customerInfo:
