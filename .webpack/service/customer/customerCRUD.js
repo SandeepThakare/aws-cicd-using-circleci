@@ -91,7 +91,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\n__webpack_require__(/*! source-map-support/register */ \"source-map-support/register\");\n\nvar _awsSdk = __webpack_require__(/*! aws-sdk */ \"aws-sdk\");\n\n// eslint-disable-line import/no-extraneous-dependencies\n\nvar options = {};\n\n// connect to local DB if running offline\nif (process.env.IS_OFFLINE) {\n\toptions = {\n\t\tregion: 'localhost',\n\t\tendpoint: 'http://localhost:8000'\n\t};\n}\n\nvar dynamoDB = new _awsSdk.DynamoDB.DocumentClient(options);\n\nexports.default = dynamoDB;\n\n//# sourceURL=webpack:///./common/dynamodb.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n\tvalue: true\n});\n\n__webpack_require__(/*! source-map-support/register */ \"source-map-support/register\");\n\nvar _awsSdk = __webpack_require__(/*! aws-sdk */ \"aws-sdk\");\n\n// eslint-disable-line import/no-extraneous-dependencies\n\nvar options = {};\n\n// connect to local DB if running offline\nif (process.env.IS_OFFLINE) {\n\toptions = {\n\t\tregion: 'us-east-1',\n\t\tendpoint: 'http://localhost:8000'\n\t};\n}\n\nvar dynamoDB = new _awsSdk.DynamoDB.DocumentClient(options);\n\nexports.default = dynamoDB;\n\n//# sourceURL=webpack:///./common/dynamodb.js?");
 
 /***/ }),
 
