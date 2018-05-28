@@ -77,7 +77,7 @@ functions:
 
 resources:
   Resources:
-    customer-info:
+    customerInfo:
         Type: AWS::DynamoDB::Table
         DeletionPolicy: Retain
         Properties:
