@@ -28,7 +28,7 @@ export function addCustomer(event, context, callback) {
 	let postParams = new Common().postParams(process.env.CUSTOMER_INFO, Item);
 
 	console.log(postParams);
-	console.log('dasd ----> ', JSON.stringify(new Common().callbackHandler(statusCode.NO_CONTENT, err)));
+	console.log('dasd ----> ', JSON.stringify(new Common().callbackHandler(statusCode.NO_CONTENT, 'err')));
 
 	dynamoDB.put(postParams, (err, data) => {
 		if (err) {
