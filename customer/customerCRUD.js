@@ -38,8 +38,7 @@ export function addCustomer(event, context, callback) {
 		}
 
 		console.log('Data added successfully', data);
-		callback(null, await new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
-		return;
+		return callback(null, await new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
 	});
 
 }
