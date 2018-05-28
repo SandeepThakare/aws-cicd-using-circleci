@@ -5,7 +5,7 @@ import StatusCode from '../common/statusCode';
 let statusCode = new StatusCode().getStatusCode();
 // AWS.config.region = 'us-east-1';
 
-export async function addCustomer(event, context, callback) {
+export function addCustomer(event, context, callback) {
 
 	let eventData;
 	let email;
@@ -30,10 +30,10 @@ export async function addCustomer(event, context, callback) {
 	console.log(postParams);
 	console.log('dasd ----> ', JSON.stringify(new Common().callbackHandler(statusCode.NO_CONTENT, 'err')));
 
-	dynamoDB.put(postParams, (err, data) => {
+	dynamoDB.put(postParams, async (err, data) => {
 		if (err) {
 			console.log('Unable to add records in table. Error JSON: ', JSON.stringify(err, undefined, 2));
-			callback(null, new Common().callbackHandler(statusCode.NO_CONTENT, err));
+			callback(null, await new Common().callbackHandler(statusCode.NO_CONTENT, err));
 			return;
 		}
 
