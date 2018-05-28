@@ -26,7 +26,7 @@ describe('getCustomersList', () => {
 		getCustomersList({}, {}, (err, response) => {
 			console.log('Body --', response);
 			let val = JSON.parse(response.body);
-			expect(val.ScannedCount).toBeUndefined();
+			expect(val.ScannedCount).toBeGreaterThanOrEqual(0);
 		});
 	});
 });
