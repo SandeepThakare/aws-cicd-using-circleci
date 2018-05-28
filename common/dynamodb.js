@@ -7,7 +7,7 @@ console.log('Envoirment -----> ', process.env.IS_OFFLINE)
 if (!process.env.IS_OFFLINE) {
 	console.log('Inside of offline')
 	options = {
-		region: us-east-1,
+		region: 'us-east-1',
 		endpoint: 'http://localhost:8000',
 	};
 }
