@@ -10,7 +10,7 @@ export const hello = (event, context, callback) => {
 		}),
 	};
 
-	console.log(new Common().callbackHandler(200, 'abc'));
+	// console.log(new Common().callbackHandler(200, 'abc'));
 
 	callback(null, response);
 };

@@ -26,7 +26,7 @@ export function addCustomer(event, context, callback) {
 
 	let postParams = new Common().postParams(process.env.CUSTOMER_INFO, Item);
 
-	console.log(postParams);
+	// console.log(postParams);
 
 	dynamoDB.put(postParams, (err, data) => {
 		if (err) {
@@ -45,7 +45,7 @@ export function addCustomer(event, context, callback) {
 export function getCustomersList(event, context, callback) {
 
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
-	console.log(scanParams);
+	// console.log(scanParams);
 
 	dynamoDB.scan(scanParams, (err, data) => {
 		if(err) {

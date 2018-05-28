@@ -1,6 +1,6 @@
 export default class StatusCode {
 	constructor() {
-		console.log('Inside Status code file');
+		// console.log('Inside Status code file');
 	}
 
 	getStatusCode() {

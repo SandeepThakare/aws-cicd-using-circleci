@@ -1,6 +1,6 @@
 export default class common {
 	constructor() {
-		console.log('In common js constructor');
+		// console.log('In common js constructor');
 	}
 
 	callbackHandler(statusCode, message) {
