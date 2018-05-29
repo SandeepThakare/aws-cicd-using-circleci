@@ -30,31 +30,31 @@ export function addCustomer(event, context, callback) {
 	console.log(postParams);
 	console.log('dasd ----> ', JSON.stringify(new Common().callbackHandler(statusCode.NO_CONTENT, 'err')));
 
-	dynamoDB.put(postParams, async (err, data) => {
+	dynamoDB.put(postParams, (err, data) => {
 		if (err) {
 			console.log('Unable to add records in table. Error JSON: ', JSON.stringify(err, undefined, 2));
-			return callback(null, await new Common().callbackHandler(statusCode.NO_CONTENT, err));
+			return callback(null, new Common().callbackHandler(statusCode.NO_CONTENT, err));
 		}
 
 		console.log('Data added successfully', data);
-		return callback(null, await new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
+		return callback(null, new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
 	});
 
 }
 
-export function getCustomersList(event, context, callback) {
+export const getCustomersList = async (event, context, callback) => {
 
-	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
+	let scanParams = await new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
 
-	dynamoDB.scan(scanParams, (err, data) => {
+	dynamoDB.scan(scanParams, async (err, data) => {
 		if(err) {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
-			return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
+			return callback(null, await new Common().callbackHandler(statusCode.BAD_REQUEST, err));
 		}
 
 		console.log('Result - ', data);
-		callback(null, new Common().callbackHandler(statusCode.OK, data));
+		callback(null, await new Common().callbackHandler(statusCode.OK, data));
 		return;
 	});
 }

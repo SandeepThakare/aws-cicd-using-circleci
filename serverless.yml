@@ -8,7 +8,7 @@ provider:
   stage: dev
   environment:
     CUSTOMER_INFO: "customer-info"
-    IS_OFFLINE: false
+    IS_OFFLINE: true
 
   iamRoleStatements:
     - Effect: Allow
