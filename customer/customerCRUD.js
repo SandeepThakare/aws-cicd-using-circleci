@@ -1,5 +1,6 @@
 import Common from '../common/common';
 import AWS from 'aws-sdk';
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 import dynamoDB from '../common/dynamodb';
 import StatusCode from '../common/statusCode';
 let statusCode = new StatusCode().getStatusCode();
@@ -49,7 +50,7 @@ export function getCustomersList(event, context, callback) {
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
 
-	dynamoDB.scan(scanParams, async (err, data) => {
+	dynamodb.scan(scanParams, async (err, data) => {
 		if(err) {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
 			return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
@@ -57,7 +58,15 @@ export function getCustomersList(event, context, callback) {
 
 		console.log('Result - ', data);
 		console.log(await new Common().callbackHandler(statusCode.OK, data))
-		callback(null, await new Common().callbackHandler(statusCode.OK, data));
+		callback(null, {
+			StatusCode: 201,
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': '*',
+				'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
+			},
+			body: JSON.stringify('success')
+		});
 		return;
 	});
 }
