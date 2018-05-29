@@ -311,8 +311,6 @@ var _statusCode2 = _interopRequireDefault(_statusCode);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var dynamodb = new _awsSdk2.default.DynamoDB.DocumentClient();
-
 var statusCode = new _statusCode2.default().getStatusCode();
 // AWS.config.region = 'us-east-1';
 
@@ -360,7 +358,7 @@ function getCustomersList(event, context, callback) {
 	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
 
-	dynamodb.scan(scanParams, function () {
+	_dynamodb2.default.scan(scanParams, function () {
 		var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(err, data) {
 			return _regenerator2.default.wrap(function _callee$(_context) {
 				while (1) {
@@ -386,18 +384,16 @@ function getCustomersList(event, context, callback) {
 
 							_context.t0.log.call(_context.t0, _context.t1);
 
-							callback(null, {
-								StatusCode: 201,
-								headers: {
-									'Access-Control-Allow-Origin': '*',
-									'Access-Control-Allow-Headers': '*',
-									'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT'
-								},
-								body: (0, _stringify2.default)('success')
-							});
+							_context.t2 = callback;
+							_context.next = 12;
+							return new _common2.default().callbackHandler(statusCode.OK, data);
+
+						case 12:
+							_context.t3 = _context.sent;
+							(0, _context.t2)(null, _context.t3);
 							return _context.abrupt('return');
 
-						case 11:
+						case 15:
 						case 'end':
 							return _context.stop();
 					}
