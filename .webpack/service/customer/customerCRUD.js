@@ -353,6 +353,8 @@ function addCustomer(event, context, callback) {
 function getCustomersList(event, context, callback) {
 	var _this = this;
 
+	context.callbackWaitsForEmptyEventLoop = false;
+
 	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
 

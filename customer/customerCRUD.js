@@ -43,6 +43,8 @@ export function addCustomer(event, context, callback) {
 }
 
 export function getCustomersList(event, context, callback) {
+	
+	context.callbackWaitsForEmptyEventLoop = false
 
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
