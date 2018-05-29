@@ -423,15 +423,17 @@ var getCustomersList = exports.getCustomersList = function () {
 											case 7:
 
 												console.log('Result - ', data);
-												_context2.t2 = callback;
-												_context2.next = 11;
-												return new _common2.default().callbackHandler(statusCode.OK, 'data added successfully');
+												callback(null, {
+													StatusCode: 200,
+													headers: {
+														'Access-Control-Allow-Origin': '*',
+														'Access-Control-Allow-Headers': '*',
+														'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT'
+													},
+													body: (0, _stringify2.default)('No data')
+												});
 
-											case 11:
-												_context2.t3 = _context2.sent;
-												return _context2.abrupt('return', (0, _context2.t2)(null, _context2.t3));
-
-											case 13:
+											case 9:
 											case 'end':
 												return _context2.stop();
 										}

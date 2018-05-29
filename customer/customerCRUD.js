@@ -54,7 +54,15 @@ export const getCustomersList = async (event, context, callback) => {
 		}
 
 		console.log('Result - ', data);
-		return callback(null, await new Common().callbackHandler(statusCode.OK, 'data added successfully'));
+		callback(null, {
+			StatusCode: 200,
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': '*',
+				'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
+			},
+			body: JSON.stringify('No data')
+		});
 	});
 }
 
