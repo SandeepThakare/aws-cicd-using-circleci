@@ -220,15 +220,9 @@ var hello = exports.hello = function () {
 
 						_context.t0.log.call(_context.t0, _context.t1);
 
-						_context.t2 = callback;
-						_context.next = 9;
-						return new _common2.default().callbackHandler(200, 'hello there	');
+						callback(null, new _common2.default().callbackHandler(200, 'hello there	'));
 
-					case 9:
-						_context.t3 = _context.sent;
-						(0, _context.t2)(null, _context.t3);
-
-					case 11:
+					case 7:
 					case 'end':
 						return _context.stop();
 				}
