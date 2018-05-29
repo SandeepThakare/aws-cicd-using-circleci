@@ -3,9 +3,10 @@ service: cicd-aws
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs6.10
   region: us-east-1
   stage: dev
+  memorySize: 128
   environment:
     CUSTOMER_INFO: "customer-info"
     IS_OFFLINE: ${opt:is-offline}

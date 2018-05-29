@@ -338,7 +338,7 @@ function addCustomer(event, context, callback) {
 		}
 
 		console.log('Data added successfully', data);
-		return callback(null, new _common2.default().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
+		callback(null, new _common2.default().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
 	});
 }
 
