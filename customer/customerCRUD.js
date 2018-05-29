@@ -44,7 +44,7 @@ export function addCustomer(event, context, callback) {
 
 export const getCustomersList = async (event, context, callback) => {
 
-	let scanParams = await new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
+	let scanParams = await new Common().scanParams(process.env.CUSTOMER_INFO);
 	console.log(scanParams);
 
 	dynamoDB.scan(scanParams, async (err, data) => {

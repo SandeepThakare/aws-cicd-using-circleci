@@ -393,7 +393,7 @@ var getCustomersList = exports.getCustomersList = function () {
 				switch (_context3.prev = _context3.next) {
 					case 0:
 						_context3.next = 2;
-						return new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
+						return new _common2.default().scanParams(process.env.CUSTOMER_INFO);
 
 					case 2:
 						scanParams = _context3.sent;
