@@ -30,14 +30,14 @@ export function addCustomer(event, context, callback) {
 	console.log(postParams);
 	console.log('dasd ----> ', JSON.stringify(new Common().callbackHandler(statusCode.NO_CONTENT, 'err')));
 
-	dynamoDB.put(postParams, (err, data) => {
+	dynamoDB.put(postParams, async (err, data) => {
 		if (err) {
 			console.log('Unable to add records in table. Error JSON: ', JSON.stringify(err, undefined, 2));
-			return callback(null, new Common().callbackHandler(statusCode.NO_CONTENT, err));
+			return callback(null, await new Common().callbackHandler(statusCode.NO_CONTENT, err));
 		}
 
 		console.log('Data added successfully', data);
-		return callback(null, new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
+		return callback(null, await new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
 	});
 
 }
