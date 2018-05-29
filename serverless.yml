@@ -19,7 +19,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.CUSTOMER_INFO}"
+      Resource: "arn:aws:dynamodb:us-east-1:495730804023:table/customer-info"
 
     - Effect: "Allow"
       Action:

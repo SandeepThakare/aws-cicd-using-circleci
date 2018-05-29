@@ -274,21 +274,13 @@ exports.default = StatusCode;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.getCustomersList = undefined;
-
-var _regenerator = __webpack_require__(/*! babel-runtime/regenerator */ "babel-runtime/regenerator");
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _asyncToGenerator2 = __webpack_require__(/*! babel-runtime/helpers/asyncToGenerator */ "babel-runtime/helpers/asyncToGenerator");
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _stringify = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ "babel-runtime/core-js/json/stringify");
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
 exports.addCustomer = addCustomer;
+exports.getCustomersList = getCustomersList;
 exports.getCustomer = getCustomer;
 
 __webpack_require__(/*! source-map-support/register */ "source-map-support/register");
@@ -315,7 +307,6 @@ var statusCode = new _statusCode2.default().getStatusCode();
 // AWS.config.region = 'us-east-1';
 
 function addCustomer(event, context, callback) {
-	var _this = this;
 
 	var eventData = void 0;
 	var email = void 0;
@@ -340,125 +331,33 @@ function addCustomer(event, context, callback) {
 	console.log(postParams);
 	console.log('dasd ----> ', (0, _stringify2.default)(new _common2.default().callbackHandler(statusCode.NO_CONTENT, 'err')));
 
-	_dynamodb2.default.put(postParams, function () {
-		var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(err, data) {
-			return _regenerator2.default.wrap(function _callee$(_context) {
-				while (1) {
-					switch (_context.prev = _context.next) {
-						case 0:
-							if (!err) {
-								_context.next = 7;
-								break;
-							}
+	_dynamodb2.default.put(postParams, function (err, data) {
+		if (err) {
+			console.log('Unable to add records in table. Error JSON: ', (0, _stringify2.default)(err, undefined, 2));
+			return callback(null, new _common2.default().callbackHandler(statusCode.NO_CONTENT, err));
+		}
 
-							console.log('Unable to add records in table. Error JSON: ', (0, _stringify2.default)(err, undefined, 2));
-							_context.t0 = callback;
-							_context.next = 5;
-							return new _common2.default().callbackHandler(statusCode.NO_CONTENT, err);
-
-						case 5:
-							_context.t1 = _context.sent;
-							return _context.abrupt('return', (0, _context.t0)(null, _context.t1));
-
-						case 7:
-
-							console.log('Data added successfully', data);
-							_context.t2 = callback;
-							_context.next = 11;
-							return new _common2.default().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData });
-
-						case 11:
-							_context.t3 = _context.sent;
-							return _context.abrupt('return', (0, _context.t2)(null, _context.t3));
-
-						case 13:
-						case 'end':
-							return _context.stop();
-					}
-				}
-			}, _callee, _this);
-		}));
-
-		return function (_x, _x2) {
-			return _ref.apply(this, arguments);
-		};
-	}());
+		console.log('Data added successfully', data);
+		return callback(null, new _common2.default().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
+	});
 }
 
-var getCustomersList = exports.getCustomersList = function () {
-	var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3(event, context, callback) {
-		var scanParams;
-		return _regenerator2.default.wrap(function _callee3$(_context3) {
-			while (1) {
-				switch (_context3.prev = _context3.next) {
-					case 0:
-						_context3.next = 2;
-						return new _common2.default().scanParams(process.env.CUSTOMER_INFO);
+function getCustomersList(event, context, callback) {
 
-					case 2:
-						scanParams = _context3.sent;
+	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
+	console.log(scanParams);
 
-						console.log(scanParams);
-						console.log(new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'err'));
+	_dynamodb2.default.scan(scanParams, function (err, data) {
+		if (err) {
+			console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
+			return callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
+		}
 
-						_dynamodb2.default.scan(scanParams, function () {
-							var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(err, data) {
-								return _regenerator2.default.wrap(function _callee2$(_context2) {
-									while (1) {
-										switch (_context2.prev = _context2.next) {
-											case 0:
-												if (!err) {
-													_context2.next = 7;
-													break;
-												}
-
-												console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
-												_context2.t0 = callback;
-												_context2.next = 5;
-												return new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err);
-
-											case 5:
-												_context2.t1 = _context2.sent;
-												return _context2.abrupt('return', (0, _context2.t0)(null, _context2.t1));
-
-											case 7:
-
-												console.log('Result - ', data);
-												callback(null, {
-													StatusCode: 200,
-													headers: {
-														'Access-Control-Allow-Origin': '*',
-														'Access-Control-Allow-Headers': '*',
-														'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT'
-													},
-													body: (0, _stringify2.default)('No data')
-												});
-
-											case 9:
-											case 'end':
-												return _context2.stop();
-										}
-									}
-								}, _callee2, undefined);
-							}));
-
-							return function (_x6, _x7) {
-								return _ref3.apply(this, arguments);
-							};
-						}());
-
-					case 6:
-					case 'end':
-						return _context3.stop();
-				}
-			}
-		}, _callee3, undefined);
-	}));
-
-	return function getCustomersList(_x3, _x4, _x5) {
-		return _ref2.apply(this, arguments);
-	};
-}();
+		console.log('Result - ', data);
+		callback(null, new _common2.default().callbackHandler(statusCode.OK, data));
+		return;
+	});
+}
 
 function getCustomer(event, context, callback) {
 
@@ -478,17 +377,17 @@ function getCustomer(event, context, callback) {
 
 		if (err) {
 			console.log('Unable to scan table. Error JOSN: ', (0, _stringify2.default)(err, undefined, 2));
-			return callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
-			// return;
+			callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
+			return;
 		}
 
 		if (result.Items.length) {
 			console.log('Result - ', result.Items[0]);
-			return callback(null, new _common2.default().callbackHandler(statusCode.OK, result.Items[0]));
-			// return;
+			callback(null, new _common2.default().callbackHandler(statusCode.OK, result.Items[0]));
+			return;
 		} else {
-			return callback(null, new _common2.default().callbackHandler(statusCode.OK, 'No data associated with this ID'));
-			// return;
+			callback(null, new _common2.default().callbackHandler(statusCode.OK, 'No data associated with this ID'));
+			return;
 		}
 	});
 }
@@ -517,17 +416,6 @@ module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
 
-/***/ "babel-runtime/helpers/asyncToGenerator":
-/*!*********************************************************!*\
-  !*** external "babel-runtime/helpers/asyncToGenerator" ***!
-  \*********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/helpers/asyncToGenerator");
-
-/***/ }),
-
 /***/ "babel-runtime/helpers/classCallCheck":
 /*!*******************************************************!*\
   !*** external "babel-runtime/helpers/classCallCheck" ***!
@@ -547,17 +435,6 @@ module.exports = require("babel-runtime/helpers/classCallCheck");
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/createClass");
-
-/***/ }),
-
-/***/ "babel-runtime/regenerator":
-/*!********************************************!*\
-  !*** external "babel-runtime/regenerator" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/regenerator");
 
 /***/ }),
 
