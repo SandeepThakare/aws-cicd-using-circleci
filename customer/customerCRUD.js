@@ -54,8 +54,7 @@ export const getCustomersList = async (event, context, callback) => {
 		}
 
 		console.log('Result - ', data);
-		callback(null, await new Common().callbackHandler(statusCode.OK, data));
-		return;
+		return callback(null, await new Common().callbackHandler(statusCode.OK, 'data added successfully'));
 	});
 }
 
@@ -77,17 +76,17 @@ export function getCustomer(event, context, callback) {
         
 		if(err) {
 			console.log('Unable to scan table. Error JOSN: ', JSON.stringify(err, undefined, 2));
-			callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST,err));
-			return;
+			return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST,err));
+			// return;
 		}
 
 		if(result.Items.length) {
 			console.log('Result - ', result.Items[0]);
-			callback(null, new Common().callbackHandler(statusCode.OK, result.Items[0]));
-			return;
+			return callback(null, new Common().callbackHandler(statusCode.OK, result.Items[0]));
+			// return;
 		} else {
-			callback(null, new Common().callbackHandler(statusCode.OK, 'No data associated with this ID'));
-			return;
+			return callback(null, new Common().callbackHandler(statusCode.OK, 'No data associated with this ID'));
+			// return;
 		}
 	});
 }

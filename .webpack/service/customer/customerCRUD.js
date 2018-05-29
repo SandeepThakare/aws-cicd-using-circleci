@@ -425,14 +425,13 @@ var getCustomersList = exports.getCustomersList = function () {
 												console.log('Result - ', data);
 												_context2.t2 = callback;
 												_context2.next = 11;
-												return new _common2.default().callbackHandler(statusCode.OK, data);
+												return new _common2.default().callbackHandler(statusCode.OK, 'data added successfully');
 
 											case 11:
 												_context2.t3 = _context2.sent;
-												(0, _context2.t2)(null, _context2.t3);
-												return _context2.abrupt('return');
+												return _context2.abrupt('return', (0, _context2.t2)(null, _context2.t3));
 
-											case 14:
+											case 13:
 											case 'end':
 												return _context2.stop();
 										}
@@ -476,17 +475,17 @@ function getCustomer(event, context, callback) {
 
 		if (err) {
 			console.log('Unable to scan table. Error JOSN: ', (0, _stringify2.default)(err, undefined, 2));
-			callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
-			return;
+			return callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
+			// return;
 		}
 
 		if (result.Items.length) {
 			console.log('Result - ', result.Items[0]);
-			callback(null, new _common2.default().callbackHandler(statusCode.OK, result.Items[0]));
-			return;
+			return callback(null, new _common2.default().callbackHandler(statusCode.OK, result.Items[0]));
+			// return;
 		} else {
-			callback(null, new _common2.default().callbackHandler(statusCode.OK, 'No data associated with this ID'));
-			return;
+			return callback(null, new _common2.default().callbackHandler(statusCode.OK, 'No data associated with this ID'));
+			// return;
 		}
 	});
 }
