@@ -275,6 +275,14 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
+var _regenerator = __webpack_require__(/*! babel-runtime/regenerator */ "babel-runtime/regenerator");
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _asyncToGenerator2 = __webpack_require__(/*! babel-runtime/helpers/asyncToGenerator */ "babel-runtime/helpers/asyncToGenerator");
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
 var _stringify = __webpack_require__(/*! babel-runtime/core-js/json/stringify */ "babel-runtime/core-js/json/stringify");
 
 var _stringify2 = _interopRequireDefault(_stringify);
@@ -343,20 +351,50 @@ function addCustomer(event, context, callback) {
 }
 
 function getCustomersList(event, context, callback) {
+	var _this = this;
 
 	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
 
-	_dynamodb2.default.scan(scanParams, function (err, data) {
-		if (err) {
-			console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
-			return callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
-		}
+	_dynamodb2.default.scan(scanParams, function () {
+		var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(err, data) {
+			var cb;
+			return _regenerator2.default.wrap(function _callee$(_context) {
+				while (1) {
+					switch (_context.prev = _context.next) {
+						case 0:
+							if (!err) {
+								_context.next = 3;
+								break;
+							}
 
-		console.log('Result - ', data);
-		callback(null, new _common2.default().callbackHandler(statusCode.OK, data));
-		return;
-	});
+							console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
+							return _context.abrupt('return', callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err)));
+
+						case 3:
+
+							console.log('Result - ', data);
+							_context.next = 6;
+							return new _common2.default().callbackHandler(statusCode.OK, data);
+
+						case 6:
+							cb = _context.sent;
+
+							callback(null, cb);
+							return _context.abrupt('return');
+
+						case 9:
+						case 'end':
+							return _context.stop();
+					}
+				}
+			}, _callee, _this);
+		}));
+
+		return function (_x, _x2) {
+			return _ref.apply(this, arguments);
+		};
+	}());
 }
 
 function getCustomer(event, context, callback) {
@@ -416,6 +454,17 @@ module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
 
+/***/ "babel-runtime/helpers/asyncToGenerator":
+/*!*********************************************************!*\
+  !*** external "babel-runtime/helpers/asyncToGenerator" ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/helpers/asyncToGenerator");
+
+/***/ }),
+
 /***/ "babel-runtime/helpers/classCallCheck":
 /*!*******************************************************!*\
   !*** external "babel-runtime/helpers/classCallCheck" ***!
@@ -435,6 +484,17 @@ module.exports = require("babel-runtime/helpers/classCallCheck");
 /***/ (function(module, exports) {
 
 module.exports = require("babel-runtime/helpers/createClass");
+
+/***/ }),
+
+/***/ "babel-runtime/regenerator":
+/*!********************************************!*\
+  !*** external "babel-runtime/regenerator" ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/regenerator");
 
 /***/ }),
 
