@@ -1,5 +1,5 @@
 import Common from '../common/common';
-import AWS from 'aws-sdk';
+import AWS, { CostExplorer } from 'aws-sdk';
 import dynamoDB from '../common/dynamodb';
 import StatusCode from '../common/statusCode';
 let statusCode = new StatusCode().getStatusCode();
@@ -46,6 +46,7 @@ export const getCustomersList = async (event, context, callback) => {
 
 	let scanParams = await new Common().scanParams(process.env.CUSTOMER_INFO);
 	console.log(scanParams);
+	console.log(new Common().callbackHandler(statusCode.BAD_REQUEST, err))
 
 	dynamoDB.scan(scanParams, async (err, data) => {
 		if(err) {

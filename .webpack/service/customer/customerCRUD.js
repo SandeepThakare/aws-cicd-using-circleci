@@ -399,6 +399,7 @@ var getCustomersList = exports.getCustomersList = function () {
 						scanParams = _context3.sent;
 
 						console.log(scanParams);
+						console.log(new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
 
 						_dynamodb2.default.scan(scanParams, function () {
 							var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2(err, data) {
@@ -446,7 +447,7 @@ var getCustomersList = exports.getCustomersList = function () {
 							};
 						}());
 
-					case 5:
+					case 6:
 					case 'end':
 						return _context3.stop();
 				}
