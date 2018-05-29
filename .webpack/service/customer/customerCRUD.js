@@ -415,7 +415,7 @@ var getCustomersList = exports.getCustomersList = function () {
 												console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
 												_context2.t0 = callback;
 												_context2.next = 5;
-												return new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err);
+												return new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'err');
 
 											case 5:
 												_context2.t1 = _context2.sent;
