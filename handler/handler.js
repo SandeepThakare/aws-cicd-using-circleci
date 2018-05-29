@@ -12,6 +12,6 @@ export const hello = async (event, context, callback) => {
 
 	console.log(new Common().callbackHandler(200, 'abc'));
 
-	callback(null, await new Common().callbackHandler(200, 'hello there'));
+	callback(null, await new Common().callbackHandler(200, 'hello there	'));
 };
 

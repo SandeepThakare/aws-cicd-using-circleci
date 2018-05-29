@@ -217,7 +217,7 @@ var hello = exports.hello = function () {
 
 						_context.t0 = callback;
 						_context.next = 5;
-						return new _common2.default().callbackHandler(200, 'hello there');
+						return new _common2.default().callbackHandler(200, 'hello there	');
 
 					case 5:
 						_context.t1 = _context.sent;

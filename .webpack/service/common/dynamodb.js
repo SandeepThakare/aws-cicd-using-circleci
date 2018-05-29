@@ -95,13 +95,8 @@ __webpack_require__(/*! dotenv */ "dotenv").config({ path: "../.env" /* path to 
 var options = {};
 console.log('Envoirment -----> ', process.env.IS_OFFLINE);
 // connect to local DB if running offline
-if (process.env.IS_OFFLINE) {
+if (!process.env.IS_OFFLINE) {
 	console.log('Inside of offline');
-	options = {
-		region: 'us-east-1',
-		endpoint: 'http://localhost:8000'
-	};
-} else {
 	options = {
 		region: 'us-east-1',
 		endpoint: 'http://localhost:8000'
