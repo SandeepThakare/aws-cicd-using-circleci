@@ -358,7 +358,6 @@ function getCustomersList(event, context, callback) {
 
 	_dynamodb2.default.scan(scanParams, function () {
 		var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(err, data) {
-			var cb;
 			return _regenerator2.default.wrap(function _callee$(_context) {
 				while (1) {
 					switch (_context.prev = _context.next) {
@@ -374,16 +373,25 @@ function getCustomersList(event, context, callback) {
 						case 3:
 
 							console.log('Result - ', data);
-							_context.next = 6;
+							_context.t0 = console;
+							_context.next = 7;
 							return new _common2.default().callbackHandler(statusCode.OK, data);
 
-						case 6:
-							cb = _context.sent;
+						case 7:
+							_context.t1 = _context.sent;
 
-							callback(null, cb);
+							_context.t0.log.call(_context.t0, _context.t1);
+
+							_context.t2 = callback;
+							_context.next = 12;
+							return new _common2.default().callbackHandler(statusCode.OK, data);
+
+						case 12:
+							_context.t3 = _context.sent;
+							(0, _context.t2)(null, _context.t3);
 							return _context.abrupt('return');
 
-						case 9:
+						case 15:
 						case 'end':
 							return _context.stop();
 					}

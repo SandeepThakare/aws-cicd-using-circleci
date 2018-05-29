@@ -54,8 +54,8 @@ export function getCustomersList(event, context, callback) {
 		}
 
 		console.log('Result - ', data);
-		let cb = await new Common().callbackHandler(statusCode.OK, data)
-		callback(null, cb);
+		console.log(await new Common().callbackHandler(statusCode.OK, data))
+		callback(null, await new Common().callbackHandler(statusCode.OK, data));
 		return;
 	});
 }
