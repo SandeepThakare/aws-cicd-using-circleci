@@ -48,6 +48,7 @@ functions:
       - http:
           path: handler
           method: GET
+          cors: true
   
   addCustomer:
     handler: customer/customerCRUD.addCustomer
@@ -55,6 +56,7 @@ functions:
       - http:
           path: addCustomer/{email}
           method: POST
+          cors: true
   
   getCustomersList:
     handler: customer/customerCRUD.getCustomersList
@@ -62,6 +64,7 @@ functions:
       - http:
           path: getCustomersList
           method: GET
+          cors: true
           
   getCustomer:
     handler: customer/customerCRUD.getCustomer
@@ -69,6 +72,7 @@ functions:
       - http:
           path: getCustomer/{email}
           method: GET
+          cors: true
   
 #Common functions:
   dynamodb: 
