@@ -211,19 +211,24 @@ var hello = exports.hello = function () {
 								message: 'hello there'
 							})
 						};
+						_context.t0 = console;
+						_context.next = 4;
+						return new _common2.default().callbackHandler(200, 'abc');
 
+					case 4:
+						_context.t1 = _context.sent;
 
-						console.log(new _common2.default().callbackHandler(200, 'abc'));
+						_context.t0.log.call(_context.t0, _context.t1);
 
-						_context.t0 = callback;
-						_context.next = 5;
+						_context.t2 = callback;
+						_context.next = 9;
 						return new _common2.default().callbackHandler(200, 'hello there	');
 
-					case 5:
-						_context.t1 = _context.sent;
-						(0, _context.t0)(null, _context.t1);
+					case 9:
+						_context.t3 = _context.sent;
+						(0, _context.t2)(null, _context.t3);
 
-					case 7:
+					case 11:
 					case 'end':
 						return _context.stop();
 				}
