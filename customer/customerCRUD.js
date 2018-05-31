@@ -1,5 +1,5 @@
 import Common from '../common/common';
-import AWS from 'aws-sdk';
+// import AWS from 'aws-sdk';
 import dynamoDB from '../common/dynamodb';
 import StatusCode from '../common/statusCode';
 let statusCode = new StatusCode().getStatusCode();
@@ -43,7 +43,7 @@ export function addCustomer(event, context, callback) {
 }
 
 export function getCustomersList(event, context, callback) {
-	context.callbackWaitsForEmptyEventLoop = false
+	context.callbackWaitsForEmptyEventLoop = false;
 
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
@@ -55,7 +55,7 @@ export function getCustomersList(event, context, callback) {
 		}
 
 		console.log('Result - ', data);
-		console.log(await new Common().callbackHandler(statusCode.OK, data))
+		console.log(await new Common().callbackHandler(statusCode.OK, data));
 		callback(null, await new Common().callbackHandler(statusCode.OK, data));
 		return;
 	});
