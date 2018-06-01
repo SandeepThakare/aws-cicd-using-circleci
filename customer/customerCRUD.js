@@ -57,9 +57,21 @@ export function getCustomersList(event, context, callback) {
 		console.log('Result - ', data);
 		console.log(await new Common().callbackHandler(statusCode.OK, data));
 		// context.succeed();
-		callback(null, await new Common().callbackHandler(statusCode.OK, data));
+		// callback(null, await new Common().callbackHandler(statusCode.OK, data));
 		return;
 	});
+
+	let res = {
+		StatusCode: 200,
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': '*',
+			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
+		},
+		body: JSON.stringify('Done')
+	};
+
+	callback(null, res);
 }
 
 export function getCustomer(event, context, callback) {
