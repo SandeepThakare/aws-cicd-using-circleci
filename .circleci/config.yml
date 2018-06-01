@@ -31,11 +31,11 @@ jobs:
           command: |
             curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
             chmod +x ./cc-test-reporter
-      - run:
-          name: Unit tests with coverage
-          command: |
-            ./cc-test-reporter before-build
-            npm run test:ci
+    #   - run:
+    #       name: Unit tests with coverage
+    #       command: |
+    #         ./cc-test-reporter before-build
+    #         npm run test:ci
 
       - run:
           name: Deploy application
