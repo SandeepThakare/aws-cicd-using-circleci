@@ -1,6 +1,16 @@
 
 service: cicd-aws
 
+plugins:
+  - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
 provider:
   name: aws
   runtime: nodejs6.10
@@ -27,27 +37,6 @@ provider:
         - lambda:InvokeFunction
         - lambda:InvokeAsync
       Resource: "arn:aws:lambda:us-east-1:*:*"
-
-
-plugins:
-  - serverless-webpack
-  - serverless-dynamodb-local
-  - serverless-offline
-  - serverless-export-env
-
-custom:
-  webpack:
-    webpackConfig: ./webpack.config.js
-    includeModules: true
-  webpackIncludeModules:
-    packagePath: './package.json'
-  dynamodb:
-    start:
-      port: 8000
-      inMemory: true
-      migrate: true
-    migration:
-      dir: offline/migrations
 
 functions:
   hello:
