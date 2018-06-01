@@ -2,7 +2,7 @@ require('dotenv').config({ path: '../.env' /* path to your project root folder *
 // import { DynamoDB } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 import AWS from 'aws-sdk';
 // const dynamoDB = new AWS.DynamoDB.DocumentClient();
-let options = {};
+let options = null;
 console.log('Envoirment -----> ', process.env.IS_OFFLINE);
 // connect to local DB if running offline
 if (!process.env.IS_OFFLINE) {
