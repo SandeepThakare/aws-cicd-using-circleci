@@ -1,9 +1,1 @@
-{
-    "plugins": ["source-map-support", "transform-runtime"],
-    "presets": [
-      ["env", { "node": "6.10" }],
-      "stage-3"
-    ]
-  }
-  
-  
+{ "presets": ["es2015","stage-2"] }
