@@ -66,7 +66,7 @@ export function getCustomer(event, context, callback) {
 
 	let email = null;
 
-	if(!event.pathParameters || !event.pathParameters) {
+	if(event.pathParameters || event.pathParameters) {
 		console.log('Email is missing!!');
 		callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, 'Email is missing !!!'));
 		return;
