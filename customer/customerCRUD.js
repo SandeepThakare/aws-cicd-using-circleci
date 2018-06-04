@@ -70,8 +70,8 @@ export function getCustomersList(event, context, callback) {
 		},
 		body: JSON.stringify('Done')
 	};
-	console.log('Outside callback');
-	callback(null, res);
+	console.log('Outside callback', res);
+	callback(null, 'Hello there');
 	return;
 }
 
