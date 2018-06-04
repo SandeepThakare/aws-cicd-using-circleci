@@ -48,14 +48,14 @@ export function getCustomersList(event, context, callback) {
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
 
-	dynamoDB.scan(scanParams, async (err, data) => {
+	dynamoDB.scan(scanParams, (err, data) => {
 		if(err) {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
 			return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
 		}
 
 		console.log('Result - ', data);
-		console.log(await new Common().callbackHandler(statusCode.OK, data));
+		console.log(new Common().callbackHandler(statusCode.OK, data));
 		// context.succeed();
 		// callback(null, await new Common().callbackHandler(statusCode.OK, data));
 		return;
