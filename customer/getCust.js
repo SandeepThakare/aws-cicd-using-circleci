@@ -31,13 +31,13 @@ export function getCust(event, context, callback) {
 	// 		a.callbackHandler(statusCode.BAD_REQUEST, error);
 	// 	});
 
-	dynamoDB.scan(scanParams).promise()
-		.then((data) => {
-			console.log('Result - ', data);
-			console.log(a.callbackHandler(statusCode.OK, data));
-			callback(null, a.callbackHandler(statusCode.OK, data));
-			return;
-		})
+	var dndb = dynamoDB.scan(scanParams).promise();
+	dndb.then((data) => {
+		console.log('Result - ', data);
+		console.log(a.callbackHandler(statusCode.OK, data));
+		callback(null, a.callbackHandler(statusCode.OK, data));
+		return;
+	})
 		.catch((err) => {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
 			callback(null, a.callbackHandler(statusCode.BAD_REQUEST, err));
