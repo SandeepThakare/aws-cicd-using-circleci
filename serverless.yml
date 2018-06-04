@@ -73,6 +73,15 @@ functions:
           path: getCustomer/{email}
           method: GET
           cors: true
+
+  getCust:
+    name: ${opt:stage}-getCust
+    handler: customer/getCust.getCust
+    events:
+      - http:
+          path: getCustomer/{email}
+          method: GET
+          cors: true
   
 #Common functions:
   dynamodb: 
