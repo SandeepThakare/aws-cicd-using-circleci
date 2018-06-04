@@ -312,17 +312,15 @@ var _regenerator = __webpack_require__(10);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _asyncToGenerator2 = __webpack_require__(9);
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
 var _stringify = __webpack_require__(3);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-exports.addCustomer = addCustomer;
-exports.getCustomersList = getCustomersList;
-exports.getCustomer = getCustomer;
+var _asyncToGenerator2 = __webpack_require__(9);
+
+var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+
+exports.getCust = getCust;
 
 __webpack_require__(0);
 
@@ -342,50 +340,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // import AWS from 'aws-sdk';
 var statusCode = new _statusCode2.default().getStatusCode();
-// AWS.config.region = 'us-east-1';
 
-function addCustomer(event, context, callback) {
-
-	var eventData = void 0;
-	var email = void 0;
-	var created_at = new Date().getTime();
-	if (!event.body || !event.pathParameters.email) {
-		callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'Event Body or email is missing !!!'));
-		// callback(null, new Error('Malformed input ...'));
-		return;
-	} else {
-		eventData = JSON.parse(event.body);
-		email = event.pathParameters.email;
-	}
-
-	var Item = {
-		email: decodeURIComponent(email),
-		created_at: created_at,
-		customerData: eventData
-	};
-
-	var postParams = new _common2.default().postParams(process.env.CUSTOMER_INFO, Item);
-
-	console.log(postParams);
-	console.log('dasd ----> ', (0, _stringify2.default)(new _common2.default().callbackHandler(statusCode.NO_CONTENT, 'err')));
-
-	_dynamodb2.default.put(postParams, function (err, data) {
-		if (err) {
-			console.log('Unable to add records in table. Error JSON: ', (0, _stringify2.default)(err, undefined, 2));
-			return callback(null, new _common2.default().callbackHandler(statusCode.NO_CONTENT, err));
-		}
-
-		console.log('Data added successfully', data);
-		callback(null, new _common2.default().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
-	});
-}
-
-function getCustomersList(event, context) {
+function getCust(event, context, callback) {
 	var _this = this;
 
 	context.callbackWaitsForEmptyEventLoop = false;
 
-	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INF || 'customer-inf');
+	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
 	console.log(scanParams);
 
 	_dynamodb2.default.scan(scanParams, function () {
@@ -395,27 +356,28 @@ function getCustomersList(event, context) {
 					switch (_context.prev = _context.next) {
 						case 0:
 							if (!err) {
-								_context.next = 5;
+								_context.next = 3;
 								break;
 							}
 
 							console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
-							// return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
-							_context.next = 4;
-							return new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err);
+							return _context.abrupt('return', callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err)));
 
-						case 4:
-							return _context.abrupt('return', _context.sent);
-
-						case 5:
+						case 3:
 
 							console.log('Result - ', data);
 							console.log(new _common2.default().callbackHandler(statusCode.OK, data));
 							// context.succeed();
-							// callback(null, await new Common().callbackHandler(statusCode.OK, data));
-							return _context.abrupt('return', new _common2.default().callbackHandler(statusCode.OK, data));
+							_context.t0 = callback;
+							_context.next = 8;
+							return new _common2.default().callbackHandler(statusCode.OK, data);
 
 						case 8:
+							_context.t1 = _context.sent;
+							(0, _context.t0)(null, _context.t1);
+							return _context.abrupt('return');
+
+						case 11:
 						case 'end':
 							return _context.stop();
 					}
@@ -428,51 +390,17 @@ function getCustomersList(event, context) {
 		};
 	}());
 
-	// let res = {
-	// 	StatusCode: 200,
-	// 	headers: {
-	// 		'Access-Control-Allow-Origin': '*',
-	// 		'Access-Control-Allow-Headers': '*',
-	// 		'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
-	// 	},
-	// 	body: JSON.stringify('Done')
-	// };
-	// console.log('Outside callback', res);
-	// callback(null, 'Hello there');
-	// return;
-}
-
-function getCustomer(event, context, callback) {
-
-	var email = null;
-
-	if (!event.pathParameters || !event.pathParameters.email) {
-		console.log('Email is missing!!');
-		callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, 'Email is missing !!!'));
-		return;
-	} else {
-		email = decodeURIComponent(event.pathParameters.email);
-	}
-
-	var queryParams = new _common2.default().queryParams(process.env.CUSTOMER_INFO, 'email', email);
-
-	_dynamodb2.default.query(queryParams, function (err, result) {
-
-		if (err) {
-			console.log('Unable to scan table. Error JOSN: ', (0, _stringify2.default)(err, undefined, 2));
-			callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err));
-			return;
-		}
-
-		if (result.Items.length) {
-			console.log('Result - ', result.Items[0]);
-			callback(null, new _common2.default().callbackHandler(statusCode.OK, result.Items[0]));
-			return;
-		} else {
-			callback(null, new _common2.default().callbackHandler(statusCode.OK, 'No data associated with this ID'));
-			return;
-		}
-	});
+	var res = {
+		StatusCode: 200,
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': '*',
+			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT'
+		},
+		body: (0, _stringify2.default)('Done')
+	};
+	console.log('Outside callback', res);
+	return 'hello there';
 }
 
 /***/ })

@@ -33,6 +33,5 @@ export function getCust(event, context, callback) {
 		body: JSON.stringify('Done')
 	};
 	console.log('Outside callback', res);
-	callback(null, 'Hello there');
-	return;
+	return 'hello there';
 }

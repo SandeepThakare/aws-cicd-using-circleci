@@ -3,8 +3,6 @@ service: cicd-aws
 
 plugins:
   - serverless-webpack
-  - serverless-dynamodb-local
-  - serverless-offline
 
 custom:
   webpack:
