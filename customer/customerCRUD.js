@@ -42,7 +42,7 @@ export function addCustomer(event, context, callback) {
 
 }
 
-export function getCustomersList(event, context, callback) {
+export function getCustomersList(event, context) {
 	context.callbackWaitsForEmptyEventLoop = false;
 
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
@@ -51,28 +51,29 @@ export function getCustomersList(event, context, callback) {
 	dynamoDB.scan(scanParams, (err, data) => {
 		if(err) {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
-			return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
+			// return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
+			return new Common().callbackHandler(statusCode.BAD_REQUEST, err);
 		}
 
 		console.log('Result - ', data);
 		console.log(new Common().callbackHandler(statusCode.OK, data));
 		// context.succeed();
 		// callback(null, await new Common().callbackHandler(statusCode.OK, data));
-		return;
+		return new Common().callbackHandler(statusCode.OK, data);
 	});
 
-	let res = {
-		StatusCode: 200,
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Headers': '*',
-			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
-		},
-		body: JSON.stringify('Done')
-	};
-	console.log('Outside callback', res);
-	callback(null, 'Hello there');
-	return;
+	// let res = {
+	// 	StatusCode: 200,
+	// 	headers: {
+	// 		'Access-Control-Allow-Origin': '*',
+	// 		'Access-Control-Allow-Headers': '*',
+	// 		'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
+	// 	},
+	// 	body: JSON.stringify('Done')
+	// };
+	// console.log('Outside callback', res);
+	// callback(null, 'Hello there');
+	// return;
 }
 
 export function getCustomer(event, context, callback) {
