@@ -1,7 +1,4 @@
 {
   "plugins": ["transform-runtime"],
-  "presets": [
-    ["env", { "node": "8.10" }],
-    "stage-3"
-  ]
+  "presets": ["es2015", "stage-0"]
 }

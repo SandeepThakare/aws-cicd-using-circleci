@@ -6,32 +6,26 @@ let statusCode = new StatusCode().getStatusCode();
 
 export function getCust(event, context, callback) {
 	context.callbackWaitsForEmptyEventLoop = false;
-
+	// console.log('Context ---> ', context);
+	// console.log('callback --->', callback);
+	let a = new Common();
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
-	console.log(scanParams);
 
-	dynamoDB.scan(scanParams, async (err, data) => {
-		if(err) {
-			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
-			return callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
-		}
-
-		console.log('Result - ', data);
-		console.log(new Common().callbackHandler(statusCode.OK, data));
-		// context.succeed();
-		callback(null, await new Common().callbackHandler(statusCode.OK, data));
-		return;
-	});
-
-	let res = {
-		StatusCode: 200,
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Headers': '*',
-			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
-		},
-		body: JSON.stringify('Done')
-	};
-	console.log('Outside callback', res);
-	return 'hello there';
+	return new Promise((resolve, reject) => {
+		console.log(scanParams);
+		dynamoDB.scan(scanParams, (err, data) => {
+			if (err) {
+				console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
+				reject(err);
+			}
+			resolve('success');
+			console.log('Result - ', callback(null, data));
+			console.log(a.callbackHandler(statusCode.OK, data));
+		});
+	}).then((data) => {
+		callback(null, a.callbackHandler(statusCode.OK, data));
+	})
+		.catch((error) => {
+			a.callbackHandler(statusCode.BAD_REQUEST, error);
+		});
 }

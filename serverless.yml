@@ -3,6 +3,7 @@ service: cicd-aws
 
 plugins:
   - serverless-webpack
+  - serverless-offline
 
 custom:
   webpack:

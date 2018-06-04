@@ -66,35 +66,29 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = require("source-map-support/register");
+module.exports = require("babel-runtime/helpers/createClass");
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = require("babel-runtime/helpers/createClass");
+module.exports = require("babel-runtime/helpers/classCallCheck");
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
-module.exports = require("babel-runtime/helpers/classCallCheck");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
 module.exports = require("babel-runtime/core-js/json/stringify");
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -104,15 +98,13 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _classCallCheck2 = __webpack_require__(2);
+var _classCallCheck2 = __webpack_require__(1);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(1);
+var _createClass2 = __webpack_require__(0);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
-
-__webpack_require__(0);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -148,19 +140,19 @@ var StatusCode = function () {
 exports.default = StatusCode;
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = require("dotenv");
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports) {
 
 module.exports = require("aws-sdk");
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -170,15 +162,13 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-__webpack_require__(0);
-
-var _awsSdk = __webpack_require__(6);
+var _awsSdk = __webpack_require__(5);
 
 var _awsSdk2 = _interopRequireDefault(_awsSdk);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(5).config({ path: '../.env' /* path to your project root folder */ });
+__webpack_require__(4).config({ path: '../.env' /* path to your project root folder */ });
 // import { DynamoDB } from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 
 // const dynamoDB = new AWS.DynamoDB.DocumentClient();
@@ -199,7 +189,7 @@ var dynamoDB = new _awsSdk2.default.DynamoDB.DocumentClient(options);
 exports.default = dynamoDB;
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -209,19 +199,17 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _stringify = __webpack_require__(3);
+var _stringify = __webpack_require__(2);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _classCallCheck2 = __webpack_require__(2);
+var _classCallCheck2 = __webpack_require__(1);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(1);
+var _createClass2 = __webpack_require__(0);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
-
-__webpack_require__(0);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -286,53 +274,25 @@ var common = function () {
 exports.default = common;
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/helpers/asyncToGenerator");
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-runtime/regenerator");
-
-/***/ }),
-/* 11 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _regenerator = __webpack_require__(10);
-
-var _regenerator2 = _interopRequireDefault(_regenerator);
-
-var _stringify = __webpack_require__(3);
+var _stringify = __webpack_require__(2);
 
 var _stringify2 = _interopRequireDefault(_stringify);
 
-var _asyncToGenerator2 = __webpack_require__(9);
-
-var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
-
-exports.getCust = getCust;
-
-__webpack_require__(0);
-
-var _common = __webpack_require__(8);
+var _common = __webpack_require__(7);
 
 var _common2 = _interopRequireDefault(_common);
 
-var _dynamodb = __webpack_require__(7);
+var _dynamodb = __webpack_require__(6);
 
 var _dynamodb2 = _interopRequireDefault(_dynamodb);
 
-var _statusCode = __webpack_require__(4);
+var _statusCode = __webpack_require__(3);
 
 var _statusCode2 = _interopRequireDefault(_statusCode);
 
@@ -341,54 +301,28 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import AWS from 'aws-sdk';
 var statusCode = new _statusCode2.default().getStatusCode();
 
-function getCust(event, context, callback) {
-	var _this = this;
-
+module.exports.getCust = function (event, context, callback) {
 	context.callbackWaitsForEmptyEventLoop = false;
+	// console.log('Context ---> ', context);
+	// console.log('callback --->', callback);
+	var a = new _common2.default();
 
-	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
+	var scanParams = new _common2.default().scanParams(process.env.CUSTOMER_INF || 'customer-ino');
 	console.log(scanParams);
 
-	_dynamodb2.default.scan(scanParams, function () {
-		var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee(err, data) {
-			return _regenerator2.default.wrap(function _callee$(_context) {
-				while (1) {
-					switch (_context.prev = _context.next) {
-						case 0:
-							if (!err) {
-								_context.next = 3;
-								break;
-							}
+	_dynamodb2.default.scan(scanParams, function (err, data) {
+		if (err) {
+			console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
+			callback(null, a.callbackHandler(statusCode.BAD_REQUEST, err));
+			return;
+		}
 
-							console.log('Unable to scan table. ERROR JSON: ', (0, _stringify2.default)(err, undefined, 2));
-							return _context.abrupt('return', callback(null, new _common2.default().callbackHandler(statusCode.BAD_REQUEST, err)));
-
-						case 3:
-
-							console.log('Result - ', data);
-							console.log(new _common2.default().callbackHandler(statusCode.OK, data));
-							// context.succeed();
-							_context.t0 = callback;
-							_context.next = 8;
-							return new _common2.default().callbackHandler(statusCode.OK, data);
-
-						case 8:
-							_context.t1 = _context.sent;
-							(0, _context.t0)(null, _context.t1);
-							return _context.abrupt('return');
-
-						case 11:
-						case 'end':
-							return _context.stop();
-					}
-				}
-			}, _callee, _this);
-		}));
-
-		return function (_x, _x2) {
-			return _ref.apply(this, arguments);
-		};
-	}());
+		console.log('Result - ', callback(null, data));
+		console.log(a.callbackHandler(statusCode.OK, data));
+		// context.succeed();
+		callback(null, a.callbackHandler(statusCode.OK, data));
+		return;
+	});
 
 	var res = {
 		StatusCode: 200,
@@ -400,8 +334,9 @@ function getCust(event, context, callback) {
 		body: (0, _stringify2.default)('Done')
 	};
 	console.log('Outside callback', res);
-	return 'hello there';
-}
+	callback(null, res);
+	return;
+};
 
 /***/ })
 /******/ ])));
