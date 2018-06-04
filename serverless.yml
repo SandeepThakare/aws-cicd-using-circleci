@@ -79,7 +79,7 @@ functions:
     handler: customer/getCust.getCust
     events:
       - http:
-          path: getCustomer/{email}
+          path: getCust
           method: GET
           cors: true
   
