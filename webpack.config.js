@@ -6,7 +6,6 @@ module.exports = {
 	target: 'node',
 	// Generate sourcemaps for proper error messages
 	devtool: 'source-map',
-	mode: slsw.lib.webpack.isLocal ? 'development' : 'production',
 	optimization: {
 		// We no not want to minimize our code.
 		minimize: false
