@@ -31,20 +31,30 @@ export function getCust(event, context, callback) {
 	// 		a.callbackHandler(statusCode.BAD_REQUEST, error);
 	// 	});
 
-	var dndb = dynamoDB.scan(scanParams).promise();
-	dndb.then(async (data) => {
-		console.log('Result - ', data);
-		console.log(await a.callbackHandler(statusCode.OK, data));
-		callback(null, await a.callbackHandler(statusCode.OK, data));
-		console.log('callback called');
-		return await a.callbackHandler(statusCode.OK, data);
-	})
-		.catch((err) => {
-			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
-			callback(null, a.callbackHandler(statusCode.BAD_REQUEST, err));
-			return;
-		});
+	// var dndb = dynamoDB.scan(scanParams).promise();
+	// dndb.then(async (data) => {
+	// 	console.log('Result - ', data);
+	// 	console.log(await a.callbackHandler(statusCode.OK, data));
+	// 	callback(null, await a.callbackHandler(statusCode.OK, data));
+	// 	console.log('callback called');
+	// 	return await a.callbackHandler(statusCode.OK, data);
+	// })
+	// 	.catch((err) => {
+	// 		console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
+	// 		callback(null, a.callbackHandler(statusCode.BAD_REQUEST, err));
+	// 		return;
+	// 	});
         
+
+	const p = new Promise((resolve, reject) => {
+		resolve('success');
+	});
+	p
+		.then(r => callback(null, {
+			body: 'Go Serverless Webpack (Babel) v1.0! Your function executed successfully!',
+			event,
+		}))
+		.catch(e => callback(e));
 	console.log('Outside callback');
 
 	// async function onScan(err, data) {
