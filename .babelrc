@@ -1,9 +1,21 @@
 {
   "comments": false,
-  "presets": [ 
-    [ "env", { "node": "6.10" } ]
+  "presets": [
+    [
+      "env",
+      {
+        "node": "6.10"
+      }
+    ]
   ],
   "plugins": [
-    "source-map-support"
+    "source-map-support",
+    [
+      "transform-runtime",
+      {
+        "polyfill": false,
+        "regenerator": true
+      }
+    ]
   ]
 }
