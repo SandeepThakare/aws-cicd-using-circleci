@@ -32,10 +32,10 @@ export function getCust(event, context, callback) {
 	// 	});
 
 	var dndb = dynamoDB.scan(scanParams).promise();
-	dndb.then((data) => {
+	dndb.then(async (data) => {
 		console.log('Result - ', data);
-		console.log(a.callbackHandler(statusCode.OK, data));
-		callback(null, a.callbackHandler(statusCode.OK, data));
+		console.log(await a.callbackHandler(statusCode.OK, data));
+		callback(null, await a.callbackHandler(statusCode.OK, data));
 		return;
 	})
 		.catch((err) => {
