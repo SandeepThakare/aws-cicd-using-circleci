@@ -43,6 +43,8 @@ export function getCust(event, context, callback) {
 			callback(null, a.callbackHandler(statusCode.BAD_REQUEST, err));
 			return;
 		});
+        
+	console.log('Outside callback');
 
 	// async function onScan(err, data) {
 	// 	if (err) {
