@@ -36,6 +36,7 @@ export function getCust(event, context, callback) {
 		console.log('Result - ', data);
 		console.log(await a.callbackHandler(statusCode.OK, data));
 		callback(null, await a.callbackHandler(statusCode.OK, data));
+		console.log('callback called');
 		return;
 	})
 		.catch((err) => {
