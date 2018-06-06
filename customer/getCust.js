@@ -37,7 +37,7 @@ export function getCust(event, context, callback) {
 		console.log(await a.callbackHandler(statusCode.OK, data));
 		callback(null, await a.callbackHandler(statusCode.OK, data));
 		console.log('callback called');
-		return;
+		return callback(null, await a.callbackHandler(statusCode.OK, data));
 	})
 		.catch((err) => {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
