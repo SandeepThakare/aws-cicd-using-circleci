@@ -55,6 +55,18 @@ export function getCust(event, context, callback) {
 		.catch(e => callback(e));
 	console.log('Outside callback');
 
+	let res = {
+		StatusCode: statusCode,
+		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': '*',
+			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
+		},
+		body: JSON.stringify('message')
+	};
+
+	callback(null, res);
+
 	// async function onScan(err, data) {
 	// 	if (err) {
 
