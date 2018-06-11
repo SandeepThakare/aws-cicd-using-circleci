@@ -1,21 +1,5 @@
+
 {
-  "comments": false,
-  "presets": [
-    [
-      "env",
-      {
-        "node": "6.10"
-      }
-    ]
-  ],
-  "plugins": [
-    "source-map-support",
-    [
-      "transform-runtime",
-      {
-        "polyfill": false,
-        "regenerator": true
-      }
-    ]
-  ]
+  "plugins": ["transform-runtime"],
+  "presets": ["es2015", "stage-0"]
 }

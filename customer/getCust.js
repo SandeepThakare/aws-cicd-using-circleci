@@ -48,12 +48,10 @@ export function getCust(event, context, callback) {
 
 	const p = new Promise((resolve, reject) => {
 		resolve('success');
-	});
-	p
-		.then(r => callback(null, {
-			body: 'Go Serverless Webpack (Babel) v1.0! Your function executed successfully!',
-			event,
-		}))
+	}).then(r => callback(null, {
+		body: 'Go Serverless Webpack (Babel) v1.0! Your function executed successfully!',
+		event,
+	}))
 		.catch(e => callback(e));
 	console.log('Outside callback');
 
