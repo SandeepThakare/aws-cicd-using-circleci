@@ -6,7 +6,7 @@ export default class common {
 	callbackHandler(statusCode, message) {
 
 		let res = {
-			StatusCode: statusCode,
+			statusCode: statusCode,
 			headers: {
 				'Access-Control-Allow-Origin': '*',
 				'Access-Control-Allow-Headers': '*',
