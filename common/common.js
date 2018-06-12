@@ -3,7 +3,7 @@ export default class common {
 		// console.log('In common js constructor');
 	}
 
-	callbackHandler(statusCode, message) {
+	callbackHandler(statusCode, message, callback) {
 
 		let res = {
 			statusCode: statusCode,
@@ -14,8 +14,8 @@ export default class common {
 			},
 			body: JSON.stringify(message)
 		};
-        
-		return res;
+		callback(null, res);
+		return;
 	}
     
 	postParams(tableName, items) {
