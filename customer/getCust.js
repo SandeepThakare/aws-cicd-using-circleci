@@ -56,7 +56,7 @@ export function getCust(event, context, callback) {
 	console.log('Outside callback');
 
 	let res = {
-		StatusCode: statusCode,
+		statusCode: statusCode,
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Headers': '*',
