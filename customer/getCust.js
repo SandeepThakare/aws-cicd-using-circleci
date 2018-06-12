@@ -56,18 +56,18 @@ export function getCust(event, context, callback) {
 		.catch(e => callback(e));
 	console.log('Outside callback');
 
-	let res = {
-		statusCode: 200,
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Headers': '*',
-			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
-		},
-		body: JSON.stringify('message')
-	};
+	// let res = {
+	// 	statusCode: 200,
+	// 	headers: {
+	// 		'Access-Control-Allow-Origin': '*',
+	// 		'Access-Control-Allow-Headers': '*',
+	// 		'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
+	// 	},
+	// 	body: JSON.stringify('message')
+	// };
 
-	callback(null, res);
-
+	// callback(null, res);
+	return;
 	// async function onScan(err, data) {
 	// 	if (err) {
 
