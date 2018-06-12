@@ -73,14 +73,14 @@ functions:
           method: GET
           cors: true
 
-  getCust:
-    name: ${opt:stage}-getCust
-    handler: customer/getCust.getCust
-    events:
-      - http:
-          path: getCust
-          method: GET
-          cors: true
+  # getCust:
+  #   name: ${opt:stage}-getCust
+  #   handler: customer/getCust.getCust
+  #   events:
+  #     - http:
+  #         path: getCust
+  #         method: GET
+  #         cors: true
   
 #Common functions:
   dynamodb: 
