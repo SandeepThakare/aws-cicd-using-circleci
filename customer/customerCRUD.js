@@ -61,19 +61,6 @@ export function getCustomersList(event, context, callback) {
 		callback(null, new Common().callbackHandler(statusCode.OK, data, callback));
 		return;
 	});
-
-	// let res = {
-	// 	StatusCode: 200,
-	// 	headers: {
-	// 		'Access-Control-Allow-Origin': '*',
-	// 		'Access-Control-Allow-Headers': '*',
-	// 		'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT' 
-	// 	},
-	// 	body: JSON.stringify('Done')
-	// };
-	// console.log('Outside callback', res);
-	// callback(null, 'Hello there');
-	// callback(null, new Common().callbackHandler(statusCode.OK, 'Good'));
 	return;
 }
 
