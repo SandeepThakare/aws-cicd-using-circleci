@@ -44,15 +44,26 @@ export function getCust(event, context, callback) {
 	// 		callback(null, a.callbackHandler(statusCode.BAD_REQUEST, err));
 	// 		return;
 	// 	});
-        
+
 
 	const p = new Promise((resolve, reject) => {
 		resolve('success');
 	});
-	p.then(r => callback(null, JSON.stringify({
-		body: 'Go Serverless Webpack (Babel) v1.0! Your function executed successfully!',
-		r,
-	})))
+	p.then(r => {
+		console.log('Inside', r);
+		let res = {
+			statusCode: 200,
+			headers: {
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': '*',
+				'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT'
+			},
+			body: JSON.stringify('message')
+		};
+
+		callback(null, res);
+		return;
+	})
 		.catch(e => callback(e));
 	console.log('Outside callback');
 
@@ -67,7 +78,7 @@ export function getCust(event, context, callback) {
 	// };
 
 	// callback(null, res);
-	return;
+	// return;
 	// async function onScan(err, data) {
 	// 	if (err) {
 
