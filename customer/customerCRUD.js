@@ -51,7 +51,8 @@ export function getCustomersList(event, context, callback) {
 	dynamoDB.scan(scanParams, async (err, data) => {
 		if(err) {
 			console.log('Unable to scan table. ERROR JSON: ', JSON.stringify(err, undefined, 2));
-			return callback(null, await new Common().callbackHandler(statusCode.BAD_REQUEST, err));
+			callback(null, await new Common().callbackHandler(statusCode.BAD_REQUEST, err));
+			return;
 		}
 
 		console.log('Result - ', data);
