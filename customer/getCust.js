@@ -48,15 +48,16 @@ export function getCust(event, context, callback) {
 
 	const p = new Promise((resolve, reject) => {
 		resolve('success');
-	}).then(r => callback(null, {
+	});
+	p.then(r => callback(null, {
 		body: 'Go Serverless Webpack (Babel) v1.0! Your function executed successfully!',
-		event,
+		r,
 	}))
 		.catch(e => callback(e));
 	console.log('Outside callback');
 
 	let res = {
-		statusCode: statusCode,
+		statusCode: 200,
 		headers: {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Headers': '*',
