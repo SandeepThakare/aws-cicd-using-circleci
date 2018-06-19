@@ -38,14 +38,6 @@ provider:
       Resource: "arn:aws:lambda:us-east-1:*:*"
 
 functions:
-  hello:
-    handler: handler/handler.hello
-    events:
-      - http:
-          path: handler
-          method: GET
-          cors: true
-  
   addCustomer:
     name: ${opt:stage}-addCustomer
     handler: customer/customerCRUD.addCustomer
@@ -72,15 +64,6 @@ functions:
           path: getCustomer/{email}
           method: GET
           cors: true
-
-  # getCust:
-  #   name: ${opt:stage}-getCust
-  #   handler: customer/getCust.getCust
-  #   events:
-  #     - http:
-  #         path: getCust
-  #         method: GET
-  #         cors: true
   
 #Common functions:
   dynamodb: 
