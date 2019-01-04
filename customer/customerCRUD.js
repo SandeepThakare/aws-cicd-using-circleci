@@ -84,6 +84,7 @@ export function getCustomer(event, context, callback) {
 			console.log('Unable to scan table. Error JOSN: ', JSON.stringify(err, undefined, 2));
 			callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST,err));
 			return;
+			
 		}
 
 		if(result.Items.length) {
