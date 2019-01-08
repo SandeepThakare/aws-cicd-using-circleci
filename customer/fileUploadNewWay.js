@@ -12,7 +12,7 @@ let s3 = new S3();
 export function uploadImage(event, context, callback) {
 
 	// console.log('Event body=', JSON.stringify(event.body));
-	console.log('Event=', JSON.stringify(event));
+	console.log('Event=', JSON.stringify(event.body));
 	console.log('Event=', event.headers);
 	console.log('Event body=', typeof (event.body));
 	let createdAt = new Date().toUTCString();
