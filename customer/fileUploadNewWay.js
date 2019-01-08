@@ -11,12 +11,19 @@ let s3 = new S3();
 
 export function uploadImage(event, context, callback) {
 
-	// console.log('Event body=', JSON.stringify(event.body));
-	console.log('Event=', JSON.stringify(event.body));
-	console.log('Event=', event.headers);
-	console.log('Event body=', typeof (event.body));
+	// // console.log('Event body=', JSON.stringify(event.body));
+	// console.log('Event=', JSON.stringify(event.body));
+	// console.log('Event=', event.headers);
+	// console.log('Event body=', typeof (event.body));
 	let createdAt = new Date().toUTCString();
-	let etag = null;
+    let etag = null;
+    let eventdata = null;
+
+    if(event.body) {
+        eventdata = JSON.parse(event.body);
+    }
+
+    console.log(eventdata.image_buffer);
 
 	let myBucket = 'aws-poc-image-bucket';
 	let url_prefix = 'https://s3.amazonaws.com';
@@ -71,7 +78,7 @@ export function uploadImage(event, context, callback) {
 			let params = { 
 				Bucket: myBucket, 
 				Key: `test1/test1`, 
-				Body: event.body.image_buffer, 
+				Body: eventdata.image_buffer, 
 				ContentEncoding: 'base64', 
 				ContentType: 'image/jpeg', 
 				ACL: 'public-read' 
