@@ -70,14 +70,14 @@ export function uploadImage(event, context, callback) {
 
 			let params = { 
 				Bucket: myBucket, 
-				Key: `${event.pathParameters.email}/${event.pathParameters.filename}`, 
-				Body: fileDetails.image_buffer.content.data, 
+				Key: `${event.pathParameters.email}/${fileDetails.image_buffer.filename}`, 
+				Body: fileDetails.image_buffer.content, 
 				ContentEncoding: 'base64', 
 				ContentType: fileDetails.image_buffer.contentType, 
 				ACL: 'public-read' 
 			};
 
-            console.log('params',params)
+            console.log('params',JSON.stringify(params))
 
 			s3.putObject(params, function (err, data) {
 				console.log(data);
