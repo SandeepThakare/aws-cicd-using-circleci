@@ -11,9 +11,9 @@ let s3 = new S3();
 
 export async function imageUpload(event, context, callback) {
     let eventData = {};
-    // if (event.body) {
-    //     eventData = JSON.parse(event.body);
-    // }
+    if (event.body) {
+        eventData = JSON.parse(event.body);
+    }
 
     console.log('Event Body --- ', event.body, typeof event.body);
 
