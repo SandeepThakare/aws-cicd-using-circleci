@@ -77,6 +77,15 @@ functions:
           method: POST
           cors: true
 
+  uploadImageByEmail:
+    name: ${opt:stage}-uploadImageByEmail
+    handler: customer/fileUploadNewWay.uploadImage
+    events:
+      - http:
+          path: uploadImageByEmail/{email}/{filename}
+          method: POST
+          cors: true
+
 #Common functions:
   dynamodb: 
     name: ${opt:stage}-dynamodb

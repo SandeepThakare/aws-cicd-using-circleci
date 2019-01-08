@@ -5,6 +5,7 @@ import fileType from 'file-type';
 import sha1 from 'sha1';
 import Common from '../common/common';
 import StatusCode from '../common/statusCode';
+import multipart from 'aws-lambda-multipart-parser';
 let statusCode = new StatusCode().getStatusCode();
 let s3 = new S3();
 
