@@ -16,8 +16,8 @@ export async function imageUpload(event, context, callback) {
 
     console.log('Event Body --- ', event.body, typeof event.body);
 
-    if (!event.body || !eventData.body.name || !eventData.body.image_buffer) {
-        callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, 'Image name is required !!!'));
+    if (!event.body ) {
+        callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, 'Image is required !!!'));
         return;
     }
 
