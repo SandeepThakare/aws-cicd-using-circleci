@@ -65,7 +65,8 @@ export function uploadImage(event, context, callback) {
 				});
 			});
 		} else {
-			console.log('Inside create bucket else');
+            console.log('Inside create bucket else');
+            console.log(JSON.stringify(fileDetails));
 
 			let params = { 
 				Bucket: myBucket, 
