@@ -10,9 +10,9 @@ let s3 = new S3();
 
 export async function imageUpload(event, context, callback) {
     let eventData = {};
-    if (event.body) {
-        eventData = JSON.parse(event.body);
-    }
+    // if (event.body) {
+    //     eventData = JSON.parse(event.body);
+    // }
 
     if (!event.body || !eventData.body.name || !eventData.body.image_buffer) {
         callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, 'Image name is required !!!'));
