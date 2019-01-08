@@ -18,7 +18,7 @@ export function uploadImage(event, context, callback) {
 	let createdAt = new Date().toUTCString();
 	let etag = null;
 
-	let myBucket = 'aws_poc_image_bucket';
+	let myBucket = 'aws-poc-image-bucket';
 	let url_prefix = 'https://s3.amazonaws.com';
 
 	if (!event.pathParameters || !event.pathParameters.email || !event.pathParameters.filename) {
