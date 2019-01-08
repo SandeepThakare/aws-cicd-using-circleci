@@ -38,7 +38,7 @@ export function uploadImage(event, context, callback) {
 				console.log('Inside create bucket');
 				if (err) {
 					console.log(err);
-					callback(null, callbackHandler(401, err));
+					callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
 					return;
 				}
 
