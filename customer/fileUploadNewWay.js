@@ -71,7 +71,7 @@ export function uploadImage(event, context, callback) {
 			let params = { 
 				Bucket: myBucket, 
 				Key: `${event.pathParameters.email}/${event.pathParameters.filename}`, 
-				Body: fileDetails.image_buffer.content, 
+				Body: fileDetails.image_buffer.content.data, 
 				ContentEncoding: 'base64', 
 				ContentType: fileDetails.image_buffer.contentType, 
 				ACL: 'public-read' 
