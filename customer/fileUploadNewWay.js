@@ -77,6 +77,8 @@ export function uploadImage(event, context, callback) {
 				ACL: 'public-read' 
 			};
 
+            console.log('params ',params)
+
 			s3.putObject(params, function (err, data) {
 				console.log(data);
 				if (err) {
