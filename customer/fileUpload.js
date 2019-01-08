@@ -80,7 +80,7 @@ export async function imageUpload(event, context, callback) {
 
         let params = {
             Bucket: myBucket,
-            Key: `${event.pathParameters.applicationId}/${fileName}`,
+            Key: `sandy/${fileName}`,
             Body: buffer,
             ContentEncoding: 'base64',
             ContentType: `image/${fileExt}`,
