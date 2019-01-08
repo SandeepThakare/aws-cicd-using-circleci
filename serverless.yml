@@ -68,7 +68,6 @@ functions:
           cors: true
 
   #Image Apis
-  functions:
   uploadImage:
     name: ${opt:stage}-uploadImage
     handler: customer/fileUpload.imageUpload
