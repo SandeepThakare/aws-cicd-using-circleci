@@ -19,11 +19,11 @@ export function uploadImage(event, context, callback) {
     let etag = null;
     let eventdata = null;
 
-    if(event.body) {
-        eventdata = JSON.parse(event.body);
-    }
+    // if(event.body) {
+    //     eventdata = JSON.parse(event.body);
+    // }
 
-    console.log(eventdata.image_buffer);
+    console.log(event.body.image_buffer);
 
 	let myBucket = 'aws-poc-image-bucket';
 	let url_prefix = 'https://s3.amazonaws.com';
