@@ -22,7 +22,7 @@ export async function imageUpload(event, context, callback) {
         return;
     }
 
-    let myBucket = 'aws_poc_image_bucket';
+    let myBucket = 'aws-poc-image-bucket';
     let image_buffer = eventData.image_buffer;
     let buffer = new Buffer(image_buffer.replace(/^data:image\/[a-z]+;base64,/, ''), 'base64');
     let fileMime = fileType(buffer);
