@@ -27,7 +27,7 @@ export function uploadImage(event, context, callback) {
 		return;
 	}
 
-	let fileDetails = multipart.parse(event, true);
+	// let fileDetails = multipart.parse(event, true);
 
 	// Begins the upload to the AWS S3
 	s3.headBucket({ Bucket: myBucket }, (err, data) => {
@@ -42,27 +42,27 @@ export function uploadImage(event, context, callback) {
 					return;
 				}
 
-				let params = { 
-					Bucket: myBucket, 
-					Key: `${event.pathParameters.email}/${event.pathParameters.filename}`, 
-					Body: fileDetails.image_buffer.content, 
-					ContentEncoding: 'base64', 
-					ContentType: fileDetails.image_buffer.contentType, 
-					ACL: 'public-read' 
-				};
+				// // let params = { 
+				// // 	Bucket: myBucket, 
+				// // 	Key: `${event.pathParameters.email}/${event.pathParameters.filename}`, 
+				// // 	Body: fileDetails.image_buffer.content, 
+				// // 	ContentEncoding: 'base64', 
+				// // 	ContentType: fileDetails.image_buffer.contentType, 
+				// // 	ACL: 'public-read' 
+				// // };
 
-				s3.putObject(params, function (err, data) {
-					console.log(data);
-					if (err) {
-						console.log(JSON.stringify(err. undefined, 2));
-						callback(null, new Common().callbackHandler(statusCode.FORBIDDEN, err));
-						return;
-					} else {
-						console.log('Successfully uploaded data to myBucket/myKey');
-                        callback(null, new Common().callbackHandler(statusCode.OK, 'Image successfully saved !!!'));
-                        return;
-					}
-				});
+				// s3.putObject(params, function (err, data) {
+				// 	console.log(data);
+				// 	if (err) {
+				// 		console.log(JSON.stringify(err. undefined, 2));
+				// 		callback(null, new Common().callbackHandler(statusCode.FORBIDDEN, err));
+				// 		return;
+				// 	} else {
+				// 		console.log('Successfully uploaded data to myBucket/myKey');
+                //         callback(null, new Common().callbackHandler(statusCode.OK, 'Image successfully saved !!!'));
+                //         return;
+				// 	}
+				// });
 			});
 		} else {
             console.log('Inside create bucket else');
@@ -70,10 +70,10 @@ export function uploadImage(event, context, callback) {
 
 			let params = { 
 				Bucket: myBucket, 
-				Key: `${event.pathParameters.email}/${event.pathParameters.filename}`, 
-				Body: fileDetails.image_buffer.content, 
+				Key: `test1/test1`, 
+				Body: event.body.image_buffer, 
 				ContentEncoding: 'base64', 
-				ContentType: fileDetails.image_buffer.contentType, 
+				ContentType: 'image/jpeg', 
 				ACL: 'public-read' 
 			};
 
