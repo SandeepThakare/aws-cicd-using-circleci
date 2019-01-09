@@ -9,7 +9,7 @@ import multipart from 'aws-lambda-multipart-parser';
 let statusCode = new StatusCode().getStatusCode();
 let s3 = new S3();
 
-export async function imageUpload(event, context, callback) {
+export function imageUpload(event, context, callback) {
     let eventData = {};
     if (event.body) {
         eventData = JSON.parse(event.body);
@@ -34,32 +34,32 @@ export async function imageUpload(event, context, callback) {
         return;
     }
 
-    s3.headBucket({ Bucket: myBucket }, async function (err, data) {
+    s3.headBucket({ Bucket: myBucket }, function (err, data) {
         let path = 'https://pixabay.com/en/image-statue-brass-child-art-1465348/';
 
         if (err) {
             s3.createBucket({ Bucket: myBucket }, function (err, data) {
+
+                s3.putObject(params, function (err, data) {
+                    if (err) {
+                        callback(null, new Common().callbackHandler(statusCode.INTERNAL_SERVER_ERROR), 'Unsuccessful operation !')
+                    } else {
+                        callback(null, new Common().callbackHandler(statusCode.OK, 'Successfully Uploaded !!!'));
+                        return;
+                    }
+                });
 
                 readFile(path, function (err, image_buffer) {
                     if (err) {
                         console.log(err);
                         callback(null, err);
                     }
-
-                    s3.putObject(params, function (err, data) {
-                        if (err) {
-                            callback(null, new Common().callbackHandler(statusCode.INTERNAL_SERVER_ERROR), 'Unsuccessful operation !')
-                        } else {
-                            callback(null, new Common().callbackHandler(statusCode.OK, 'Successfully Uploaded !!!'));
-                            return;
-                        }
-                    });
                 });
             });
         } else {
-            await s3.putObject(params, async function (err, data) {
+            s3.putObject(params, function (err, data) {
                 if (err) {
-                    await callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
+                    callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
                 } else {
                     callback(null, new Common().callbackHandler(statusCode.OK, 'Successfully Uploaded !!!'));
                     return;
