@@ -80,7 +80,7 @@ export function imageUpload(event, context, callback) {
 
         let params = {
             Bucket: myBucket,
-            Key: `AWS_POC/${fileName}`,
+            Key: `AWS_POC/${fileName}`, 
             Body: buffer,
             ContentEncoding: 'base64',
             ContentType: `image/${fileExt}`,
