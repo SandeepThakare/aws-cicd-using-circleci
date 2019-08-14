@@ -5,7 +5,7 @@ import AWS from 'aws-sdk';
 let options = null;
 console.log('Envoirment -----> ', process.env.IS_OFFLINE);
 // connect to local DB if running offline
-if (!process.env.IS_OFFLINE) {
+if (process.env.IS_OFFLINE || process.env.IS_OFFLINE === 'true') {
 	console.log('Inside of offline');
 	options = {
 		region: 'us-east-1',
