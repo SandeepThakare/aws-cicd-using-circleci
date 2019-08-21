@@ -3,9 +3,9 @@ require('dotenv').config({ path: '../.env' /* path to your project root folder *
 import AWS from 'aws-sdk';
 // const dynamoDB = new AWS.DynamoDB.DocumentClient();
 let options = null;
-console.log('Envoirment -----> ', process.env.IS_OFFLINE);
+console.log('Envoirment -----> ', typeof process.env.IS_OFFLINE);
 // connect to local DB if running offline
-if (process.env.IS_OFFLINE || process.env.IS_OFFLINE === 'true') {
+if (process.env.IS_OFFLINE === 'true') {
 	console.log('Inside of offline');
 	options = {
 		region: 'us-east-1',
