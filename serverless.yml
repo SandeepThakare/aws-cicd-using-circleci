@@ -14,11 +14,13 @@ provider:
   name: aws
   runtime: nodejs8.10
   region: us-east-1
-  stage: dev
+  stage: ${opt:stage}
   memorySize: 128
   environment:
     CUSTOMER_INFO: "customer-info"
     IS_OFFLINE: ${opt:is-offline}
+    DB_ENDPOINT: ${file(./config/config.json):${self:provider.stage}.DB_ENDPOINT}
+    RESOURCE: ${file(./config/config.json):${self:provider.stage}.RESOURCE}
 
   iamRoleStatements:
     - Effect: Allow
@@ -29,7 +31,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:495730804023:table/customer-info"
+      Resource: "/customer-info"
 
     - Effect: "Allow"
       Action:
@@ -42,7 +44,7 @@ functions:
   #Customer CRUD
   addCustomer:
     name: ${opt:stage}-addCustomer
-    handler: customer/customerCRUD.addCustomer
+    handler: src/customerCRUD.addCustomer
     events:
       - http:
           path: addCustomer/{email}
@@ -51,7 +53,7 @@ functions:
   
   getCustomersList:
     name: ${opt:stage}-getCustomersList
-    handler: customer/customerCRUD.getCustomersList
+    handler: src/customerCRUD.getCustomersList
     events:
       - http:
           path: getCustomersList
@@ -60,7 +62,7 @@ functions:
           
   getCustomer:
     name: ${opt:stage}-getCustomer
-    handler: customer/customerCRUD.getCustomer
+    handler: src/customerCRUD.getCustomer
     events:
       - http:
           path: getCustomer/{email}
@@ -70,7 +72,7 @@ functions:
   #Image Apis
   uploadImage:
     name: ${opt:stage}-uploadImage
-    handler: customer/fileUpload.imageUpload
+    handler: src/fileUpload.imageUpload
     events:
       - http:
           path: uploadImage
@@ -79,7 +81,7 @@ functions:
 
   uploadImageByEmail:
     name: ${opt:stage}-uploadImageByEmail
-    handler: customer/fileUploadNewWay.uploadImage
+    handler: src/fileUploadNewWay.uploadImage
     events:
       - http:
           path: uploadImageByEmail/{email}/{filename}
@@ -98,20 +100,3 @@ functions:
   statusCode:
     name: ${opt:stage}-statusCode
     handler: common/statusCode.StatusCode
-
-resources:
-  Resources:
-    customerInfo:
-        Type: AWS::DynamoDB::Table
-        DeletionPolicy: Retain
-        Properties:
-          TableName: customer-info
-          AttributeDefinitions:
-            - AttributeName: email
-              AttributeType: S
-          KeySchema:
-            - AttributeName: email
-              KeyType: HASH
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1

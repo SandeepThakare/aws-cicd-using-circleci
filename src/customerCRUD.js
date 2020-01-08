@@ -27,16 +27,11 @@ export function addCustomer(event, context, callback) {
 
 	let postParams = new Common().postParams(process.env.CUSTOMER_INFO, Item);
 
-	console.log(postParams);
-	console.log('dasd ----> ', JSON.stringify(new Common().callbackHandler(statusCode.NO_CONTENT, 'err')));
-
 	dynamoDB.put(postParams, (err, data) => {
 		if (err) {
 			console.log('Unable to add records in table. Error JSON: ', JSON.stringify(err, undefined, 2));
 			return callback(null, new Common().callbackHandler(statusCode.NO_CONTENT, err));
 		}
-
-		console.log('Data added successfully', data);
 		callback(null, new Common().callbackHandler(statusCode.OK, { email: decodeURIComponent(email), cutsomerData: eventData }));
 	});
 
@@ -46,7 +41,6 @@ export function getCustomersList(event, context, callback) {
 	// context.callbackWaitsForEmptyEventLoop = false;
 
 	let scanParams = new Common().scanParams(process.env.CUSTOMER_INFO || 'customer-info');
-	console.log(scanParams);
 
 	dynamoDB.scan(scanParams, async (err, data) => {
 		if(err) {
@@ -54,9 +48,6 @@ export function getCustomersList(event, context, callback) {
 			callback(null, await new Common().callbackHandler(statusCode.BAD_REQUEST, err));
 			return;
 		}
-
-		console.log('Result - ', data);
-		console.log(await new Common().callbackHandler(statusCode.OK, data));
 		// context.succeed();
 		callback(null, new Common().callbackHandler(statusCode.OK, data, callback));
 		return;
@@ -69,7 +60,6 @@ export function getCustomer(event, context, callback) {
 	let email = null;
 
 	if(!event.pathParameters || !event.pathParameters.email) {
-		console.log('Email is missing!!');
 		callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, 'Email is missing !!!'));
 		return;	
 	} else {
@@ -81,14 +71,11 @@ export function getCustomer(event, context, callback) {
 	dynamoDB.query(queryParams, (err, result) => {
         
 		if(err) {
-			console.log('Unable to scan table. Error JOSN: ', JSON.stringify(err, undefined, 2));
 			callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST,err));
 			return;
-			
 		}
 
 		if(result.Items.length) {
-			console.log('Result - ', result.Items[0]);
 			callback(null, new Common().callbackHandler(statusCode.OK, result.Items[0]));
 			return;
 		} else {

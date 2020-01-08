@@ -12,10 +12,6 @@ let s3 = new S3();
 
 export function uploadImage(event, context, callback) {
 
-    // console.log('Event body=', JSON.stringify(event.body));
-    console.log('Event=', JSON.stringify(event));
-    console.log('Event=', event.headers);
-    console.log('Event body=', typeof (event.body));
     let createdAt = new Date().toUTCString();
     let etag = null;
 
@@ -31,15 +27,10 @@ export function uploadImage(event, context, callback) {
     let fileDetails = multipart.parse(event, true);
     let parser = new MultipartLambda(event);
 
-    console.log('New Parser -- ', JSON.stringify(parser))
-
     // Begins the upload to the AWS S3
     s3.headBucket({ Bucket: myBucket }, (err, data) => {
-        console.log(data);
         if (err) {
             s3.createBucket({ Bucket: myBucket }, (err, data) => {
-                console.log(data);
-                console.log('Inside create bucket');
                 if (err) {
                     console.log(err);
                     callback(null, new Common().callbackHandler(statusCode.BAD_REQUEST, err));
@@ -56,7 +47,6 @@ export function uploadImage(event, context, callback) {
                 };
 
                 s3.putObject(params, function (err, data) {
-                    console.log(data);
                     if (err) {
                         console.log(JSON.stringify(err.undefined, 2));
                         callback(null, new Common().callbackHandler(statusCode.FORBIDDEN, err));
@@ -69,11 +59,8 @@ export function uploadImage(event, context, callback) {
                 });
             });
         } else {
-            console.log('Inside create bucket else');
-            // console.log(JSON.stringify(fileDetails));
             let buff = new Buffer(parser.files[0]._readableState.buffer.head.data);
             let base64data = buff.toString('base64');
-            console.log('Data --- ', JSON.stringify(base64data))
 
             let params = {
                 Bucket: myBucket,
@@ -84,10 +71,8 @@ export function uploadImage(event, context, callback) {
                 ACL: 'public-read'
             };
 
-            console.log('params', JSON.stringify(params))
-
             s3.putObject(params, function (err, data) {
-                console.log(data);
+
                 if (err) {
                     console.log(err);
                     callback(new Common().callbackHandler(statusCode.FORBIDDEN, err));
